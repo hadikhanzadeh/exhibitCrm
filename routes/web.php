@@ -13,10 +13,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::prefix(parseLocale())->group(function () {
+    Auth::routes();
+    Route::get('/', function () {
+        return view('welcome');
+    });
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });
 
-Auth::routes();
+function parseLocale(){
+    $locale = request()->segment(1);
+    $locales = config('app.available_locales');
+    $default = config('app.locale');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    if ($locale !== $default && in_array($locale, $locales, true)) {
+        app()->setLocale($locale);
+
+        return $locale;
+    }
+}
+
