@@ -17,9 +17,20 @@ use Illuminate\Support\Facades\Route;
 Route::prefix(parseLocale())->group(function () {
     Auth::routes();
     Route::get('/', function () {
-        return view('welcome');
+        return redirect(route('login'));
     });
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::group([
+        'prefix' => '/dashboard',
+        'as' => 'dashboard.',
+    ], function () {
+        Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
+    });
+    Route::get('/home', function () {
+        if(\Session::get('locale') !== 'fa') {
+            return redirect('/' . \Session::get('locale') . '/dashboard');
+        }
+        return redirect( '/dashboard');
+    });
 });
 
 function parseLocale(){

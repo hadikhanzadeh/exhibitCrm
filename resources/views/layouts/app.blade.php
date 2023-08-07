@@ -12,9 +12,8 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    @vite('resources/sass/app.scss')
 </head>
 <body>
 <div id="app">
@@ -72,15 +71,11 @@
                     @endguest
                 </ul>
                 <form>
-                    <select name="lang">
-                        <option value="">English</option>
-                        <option value="">فارسی</option>
+                    <select id="wbsSelectLang" name="lang">
+                        @foreach(config('app.available_locales') as $key => $locale)
+                            <option value="{{ $locale }}" {{ Request::segment(1) === $locale  ? 'selected' : '' }}>{{ $key }}</option>
+                        @endforeach
                     </select>
-                    @php
-                        $currentUrl = $_SERVER['HTTP_HOST'].$_SERVER["REQUEST_URI"];
-                    @endphp
-                    <input type="hidden" id="currentUrl" value="{{ $currentUrl }}" />
-                    <button>تغییر</button>
                 </form>
             </div>
         </div>
@@ -90,5 +85,9 @@
         @yield('content')
     </main>
 </div>
+
+@vite('resources/js/app.js')
+
 </body>
+
 </html>

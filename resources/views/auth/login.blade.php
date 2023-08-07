@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@php
+    Session::put(['locale' => config('app.locale')]);
+@endphp
 
 @section('content')
 <div class="container">

@@ -86,7 +86,7 @@ return [
     'locale' => 'fa',
 
     'available_locales' => [
-        'Persian' => 'fa',
+        'فارسی' => 'fa',
         'English' => 'en',
     ],
 
