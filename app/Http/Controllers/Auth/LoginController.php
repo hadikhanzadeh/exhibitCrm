@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+
 class LoginController extends Controller
 {
     /*
@@ -42,11 +43,11 @@ class LoginController extends Controller
 
     {
         $this->guard()->logout();
+        $locale = config('app.locale');
         $request->session()->flush();
         $request->session()->regenerate();
-        if(\Session::get('locale') !== 'fa' && !empty(\Session::get('locale'))) {
-            dd('/' . \Session::get('locale') . '/login');
-            return redirect('/' . \Session::get('locale') . '/login');
+        if ($locale !== 'fa' && !empty($locale)) {
+            return redirect('/' . $locale . '/login');
         }
         return redirect('/login');
     }
