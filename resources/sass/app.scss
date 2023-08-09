@@ -7,9 +7,15 @@
 
 body {
     font-family: 'iranyekan', sans-serif;
-    @import 'global';
-    @import 'header';
     @import 'sidebar';
-    @import 'ltr';
+
+    .page-content {
+        margin-right: 250px;
+        @import 'global';
+        @import 'header';
+        @import 'main';
+
+        @import 'ltr';
+    }
 }
 

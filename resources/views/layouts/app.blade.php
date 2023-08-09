@@ -10,13 +10,14 @@
     <title>{{  __('Exhibition Makers CRM') }}</title>
 
     <!-- Scripts -->
+    <link rel="stylesheet" href="{{ asset('fonts/icons/css/icons.css') }}">
     @vite('resources/sass/app.scss')
 </head>
 <body dir="{{ app()->getLocale() !== 'fa' ? 'ltr' : 'rtl' }}">
 @include('dashboard.sidebar')
 <div class="page-content">
     <header id="site-header">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row justify-content-between">
                 <nav class="col-12">
                     <div class="nav-items">
@@ -65,7 +66,7 @@
             </div>
         </div>
     </header>
-    <main class="py-4">
+    <main id="site-main" class="container-fluid">
         @yield('content')
     </main>
 </div>

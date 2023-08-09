@@ -6,9 +6,30 @@
 
         <div class="menu">
             <ul>
-                <li><a href="#">درخواست غرفه سازی</a></li>
-                <li><a href="#">رزرو غرفه سازی</a></li>
-                <li><a href="#">درخواست تور</a></li>
+                <li>
+                    <a class="active" href="#">
+                        <i class="icon-sliders"></i>
+                        داشبورد
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="icon-first-order"></i>
+                        درخواست غرفه سازی
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="icon-first-order"></i>
+                        درخواست غرفه سازی
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="icon-first-order"></i>
+                        درخواست غرفه سازی
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
