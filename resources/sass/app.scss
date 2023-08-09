@@ -1,8 +1,15 @@
-// Fonts
-@import url('https://fonts.bunny.net/css?family=Nunito');
-
 // Variables
 @import 'variables';
+@import 'fonts';
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+
+body {
+    font-family: 'iranyekan', sans-serif;
+    @import 'global';
+    @import 'header';
+    @import 'sidebar';
+    @import 'ltr';
+}
+

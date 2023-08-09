@@ -15,7 +15,11 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::prefix(parseLocale())->group(function () {
-    Auth::routes();
+    Auth::routes([
+        'register' => false, // Registration Routes...
+        'reset' => false, // Password Reset Routes...
+        'verify' => false, // Email Verification Routes...
+    ]);
     Route::get('/', function () {
         return redirect(route('login'));
     });
@@ -26,14 +30,15 @@ Route::prefix(parseLocale())->group(function () {
         Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
     });
     Route::get('/home', function () {
-        if(\Session::get('locale') !== 'fa') {
+        if (\Session::get('locale') !== 'fa') {
             return redirect('/' . \Session::get('locale') . '/dashboard');
         }
-        return redirect( '/dashboard');
+        return redirect('/dashboard');
     });
 });
 
-function parseLocale(){
+function parseLocale()
+{
     $locale = request()->segment(1);
     $locales = config('app.available_locales');
     $default = config('app.locale');

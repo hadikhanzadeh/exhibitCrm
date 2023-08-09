@@ -1,0 +1,23 @@
+#site-header {
+    background: #fff;
+    box-shadow: 0 .125rem .25rem #00000013 !important;
+    padding: 20px;
+
+    .nav-items {
+        display: flex;
+        justify-content: space-between;
+
+        .user-panel {
+            align-content: center;
+            display: flex;
+
+            ul {
+                margin-bottom: 0;
+
+                li {
+                    display: block;
+                }
+            }
+        }
+    }
+}
