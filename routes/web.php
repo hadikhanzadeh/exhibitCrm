@@ -28,6 +28,8 @@ Route::prefix(parseLocale())->group(function () {
         'as' => 'dashboard.',
     ], function () {
         Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
+        Route::get('/tour-request', [App\Http\Controllers\HomeController::class, 'tourRequest'])->name('tourRequest');
+        Route::post('/getCountries', [App\Http\Controllers\AjaxController::class, 'getCountries'])->name('tourRequest');
     });
     Route::get('/home', function () {
         if (\Session::get('locale') !== 'fa') {

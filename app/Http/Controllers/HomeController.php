@@ -21,8 +21,13 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(Request $request)
+    public function index()
     {
         return view('dashboard');
+    }
+
+    public function tourRequest(Request $request)
+    {
+        return view('dashboard.pages.tour-request');
     }
 }

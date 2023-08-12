@@ -1,0 +1,52 @@
+.wbs-panel {
+    background: #fff;
+    border: 1px solid #e7eaf0;
+    border-radius: 10px;
+    width: 100%;
+
+    header {
+        align-items: center;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        padding: 15px;
+
+        h2 {
+            font-size: 17px;
+            margin-bottom: 0;
+        }
+
+        span {
+            transition-duration: 0.2s;
+        }
+
+        &.open {
+            span {
+                transform: rotate(180deg);
+            }
+        }
+    }
+
+    .content {
+        border-top: 1px solid #eee;
+        display: none;
+        padding: 15px;
+
+        form {
+            align-items: center;
+            display: flex;
+
+            fieldset {
+                width: calc(100% / 5);
+
+                label {
+                    display: block;
+                }
+
+                select {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
