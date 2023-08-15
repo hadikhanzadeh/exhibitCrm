@@ -29,7 +29,9 @@ Route::prefix(parseLocale())->group(function () {
     ], function () {
         Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
         Route::get('/tour-request', [App\Http\Controllers\HomeController::class, 'tourRequest'])->name('tourRequest');
-        Route::post('/getCountries', [App\Http\Controllers\AjaxController::class, 'getCountries'])->name('tourRequest');
+        Route::post('/getCountries', [App\Http\Controllers\AjaxController::class, 'getCountries'])->name('getCountries');
+        Route::post('/getCites', [App\Http\Controllers\AjaxController::class, 'getCites'])->name('getCites');
+        Route::post('/getGenre', [App\Http\Controllers\AjaxController::class, 'getGenre'])->name('getGenre');
     });
     Route::get('/home', function () {
         if (\Session::get('locale') !== 'fa') {

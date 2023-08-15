@@ -35,8 +35,10 @@
         form {
             align-items: center;
             display: flex;
+            margin: 0 -15px;
 
             fieldset {
+                padding: 0 15px;
                 width: calc(100% / 5);
 
                 label {
