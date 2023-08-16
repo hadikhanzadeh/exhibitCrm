@@ -10,8 +10,11 @@
     <title>{{  __('Exhibition Makers CRM') }}</title>
 
     <!-- Scripts -->
-    <link rel="stylesheet" href="{{ asset('fonts/icons/css/icons.css') }}">
-    @vite('resources/sass/app.scss')
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.rtl.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/fonts/icons/css/icons.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/select2/dist/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/mdBootstrap/dist/mds.bs.datetimepicker.style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/sass/app.css') }}">
 </head>
 <body dir="{{ app()->getLocale() !== 'fa' ? 'ltr' : 'rtl' }}">
 @include('dashboard.sidebar')
@@ -72,8 +75,11 @@
 </div>
 </div>
 
-@vite('resources/js/app.js')
-
+<script type="text/javascript" src="{{ asset('assets/js/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/plugins/mdBootstrap/dist/mds.bs.datetimepicker.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/plugins/select2/dist/js/select2.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/js/script.js') }}"></script>
 </body>
 
 </html>

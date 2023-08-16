@@ -1,0 +1,18 @@
+// Variables
+@import 'variables';
+@import 'fonts';
+
+body {
+    font-family: 'iranyekan', sans-serif;
+    @import 'sidebar';
+
+    .page-content {
+        margin-right: 250px;
+        @import 'global';
+        @import 'header';
+        @import 'main';
+
+        @import 'ltr';
+    }
+}
+

@@ -1,0 +1,32 @@
+#site-main {
+    margin-top: 40px;
+    padding-right: 32px;
+
+    .title {
+        margin-bottom: 25px;
+
+        h1 {
+            font-size: 23px;
+            font-weight: 700;
+        }
+    }
+
+    .main-content {
+        margin-top: 50px;
+
+        .wbs-table {
+            border: 1px solid #e7eaf0;
+            border-radius: 10px;
+
+            .content {
+                border: none;
+                padding: 0 15px 15px;
+
+                table {
+                    margin: 0;
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

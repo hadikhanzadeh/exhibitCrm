@@ -8,51 +8,62 @@
             </div>
         </div>
     </div>
+    @include('dashboard.parts.filter')
+
     <div class="row">
         <div class="col-12">
-            <div class="wbs-panel">
-                <header>
-                    <h2>فیلتر نتایج</h2>
-                    <span><i class="icon-down-open-1"></i></span>
-                </header>
-                <div class="content">
-                    <form id="v" action="">
-                        @csrf
-                        <fieldset>
-                            <label class="form-label">کشور</label>
-                            <select data-url="{{ route('dashboard.getCountries') }}" id="country"
-                                    class="wbsAjaxSelect2"
-                                    name="country">
-                            </select>
-                        </fieldset>
-                        <fieldset>
-                            <label class="form-label">شهر</label>
-                            <select multiple disabled data-url="{{ route('dashboard.getCites') }}" id="city"
-                                    class="wbsAjaxSelect2"
-                                    name="city">
-                            </select>
-                        </fieldset>
-                        <fieldset>
-                            <label class="form-label">حوزه</label>
-                            <select multiple data-url="{{ route('dashboard.getGenre') }}" id="genre"
-                                    class="wbsAjaxSelect2"
-                                    name="genre">
-                            </select>
-                        </fieldset>
-                        <fieldset>
-                            <label class="form-label">تاریخ درخواست</label>
-                            <input type="text" name="register_date" class="form-control"/>
-                        </fieldset>
-                        <fieldset>
-                            <label class="form-label">وضعیت</label>
-                            <select name="status" class="form-select">
-                                <option value="0">انتخاب کنید...</option>
-                                <option value="pending">در انتظار بررسی</option>
-                                <option value="awaiting">در حال رسیدگی</option>
-                                <option value="complete">تکمیل شده</option>
-                            </select>
-                        </fieldset>
-                    </form>
+            <div class="main-content">
+                <div class="wbs-table wbs-panel">
+                    <header>
+                        <h2>نتایج</h2>
+                        <div class="left-side">
+                            asdsd
+                        </div>
+                    </header>
+                    <div class="content">
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>عنوان نمایشگاه</th>
+                                <th>نام شرکت</th>
+                                <th>نام مسئول</th>
+                                <th>حوزه</th>
+                                <th>شماره تماس</th>
+                                <th>عملیات</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>نمایشگاه تجهیزات خودرو</td>
+                                <td>سازه های خودرویی ویستا</td>
+                                <td>هادی خانزاده</td>
+                                <td>تجهیزات خودرو</td>
+                                <td>09368961858</td>
+                                <td>عملیات های موردنظر</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>نمایشگاه تجهیزات خودرو</td>
+                                <td>سازه های خودرویی ویستا</td>
+                                <td>هادی خانزاده</td>
+                                <td>تجهیزات خودرو</td>
+                                <td>09368961858</td>
+                                <td>عملیات های موردنظر</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>نمایشگاه تجهیزات خودرو</td>
+                                <td>سازه های خودرویی ویستا</td>
+                                <td>هادی خانزاده</td>
+                                <td>تجهیزات خودرو</td>
+                                <td>09368961858</td>
+                                <td>عملیات های موردنظر</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
