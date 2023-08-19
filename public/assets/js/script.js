@@ -19,7 +19,7 @@ jQuery(function ($) {
             window.location.href = 'http://' + currentLocation + currentPatch.replace('/en', '');
         }
     });
-    body.on('click', '.wbs-panel header', function () {
+    body.on('click', '.wbs-panel:not(.no-toggle) header', function () {
         const _this = $(this);
         _this.toggleClass('open').next('.content').stop(true, true).slideToggle();
     });

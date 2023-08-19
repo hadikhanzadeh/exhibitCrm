@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\tourRequest;
 use Illuminate\Http\Request;
+use App\Http\Lib\wbsUtility;
 
 class HomeController extends Controller
 {
@@ -28,6 +30,7 @@ class HomeController extends Controller
 
     public function tourRequest(Request $request)
     {
-        return view('dashboard.pages.tour-request');
+        $tourRequests = tourRequest::all()->take(10);
+        return view('dashboard.pages.tour-request', ['items' => $tourRequests]);
     }
 }

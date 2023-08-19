@@ -15,13 +15,20 @@ return new class extends Migration {
             $table->integer('user_id')->nullable();
             $table->string('company_name'); //نام شرکت
             $table->bigInteger('exhibition_id'); //آی دی نمایشگاه
+            $table->string('exhibition_title', 255); //عنوان نمایشگاه
+            $table->bigInteger('country'); //آی دی کشور
+            $table->string('country_title', 150); //عنوان کشور
+            $table->bigInteger('city'); //آی دی شهر
+            $table->string('city_title', 150); //عنوان شهر
             $table->string('mobile', 15); //شماره تماس
             $table->integer('participants')->nullable(); //تعداد شرکت کنندگان
             $table->string('email'); //ایمیل
             $table->string('manager')->nullable(); //نام و نام خانوادگی مدیرعامل
             $table->string('tracking_code'); //کد رهگیری
             $table->bigInteger('activity_area')->nullable();
+            $table->string('activity_area_title', 255)->nullable();
             $table->bigInteger('operator_id')->nullable();
+            $table->string('status', 15)->default('pending');
             $table->timestamps();
         });
     }

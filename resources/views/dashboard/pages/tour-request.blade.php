@@ -13,57 +13,55 @@
     <div class="row">
         <div class="col-12">
             <div class="main-content">
-                <div class="wbs-table wbs-panel">
-                    <header>
-                        <h2>نتایج</h2>
-                        <div class="left-side">
-                            asdsd
-                        </div>
-                    </header>
-                    <div class="content">
-                        <table class="table table-striped table-bordered">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>عنوان نمایشگاه</th>
-                                <th>نام شرکت</th>
-                                <th>نام مسئول</th>
-                                <th>حوزه</th>
-                                <th>شماره تماس</th>
-                                <th>عملیات</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>نمایشگاه تجهیزات خودرو</td>
-                                <td>سازه های خودرویی ویستا</td>
-                                <td>هادی خانزاده</td>
-                                <td>تجهیزات خودرو</td>
-                                <td>09368961858</td>
-                                <td>عملیات های موردنظر</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>نمایشگاه تجهیزات خودرو</td>
-                                <td>سازه های خودرویی ویستا</td>
-                                <td>هادی خانزاده</td>
-                                <td>تجهیزات خودرو</td>
-                                <td>09368961858</td>
-                                <td>عملیات های موردنظر</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>نمایشگاه تجهیزات خودرو</td>
-                                <td>سازه های خودرویی ویستا</td>
-                                <td>هادی خانزاده</td>
-                                <td>تجهیزات خودرو</td>
-                                <td>09368961858</td>
-                                <td>عملیات های موردنظر</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                <header>
+                    <h2>نتایج</h2>
+                    <div class="left-side">
+                        <input type="text" id="searchInTable" class="form-control" placeholder="جستجو در نتایج..."/>
                     </div>
+                </header>
+                <div class="content">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>عنوان نمایشگاه</th>
+                            <th>کشور</th>
+                            <th>شهر</th>
+                            <th>نام شرکت</th>
+                            <th>نام مسئول</th>
+                            <th>حوزه</th>
+                            <th>تعداد شرکت کنندگان</th>
+                            <th>شماره تماس</th>
+                            <th>وضعیت</th>
+                            <th>عملیات</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @if(!empty($items))
+                            @php
+                                $i = 1;
+                            @endphp
+                            @foreach($items as  $item)
+                                <tr>
+                                    <td>{{ $i }}</td>
+                                    <td>{{ $item->exhibition_title }}</td>
+                                    <td>{{ $item->country_title }}</td>
+                                    <td>{{ $item->city_title }}</td>
+                                    <td>{{ $item->company_name }}</td>
+                                    <td>{{ $item->manager }}</td>
+                                    <td>{{ $item->activity_area_title }}</td>
+                                    <td>{{ $item->participants }}</td>
+                                    <td>{{ $item->mobile }}</td>
+                                    <td>{!!  \App\Http\Lib\wbsUtility::getStatus($item->status) !!}</td>
+                                    <td>عملیات های موردنظر</td>
+                                </tr>
+                                @php
+                                    $i++;
+                                @endphp
+                            @endforeach()
+                        @endif
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
