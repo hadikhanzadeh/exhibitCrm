@@ -33,4 +33,17 @@ class HomeController extends Controller
         $tourRequests = tourRequest::all()->take(10);
         return view('dashboard.pages.tour-request', ['items' => $tourRequests]);
     }
+
+    public function generateToken(Request $request)
+    {
+        $token = $request->user()->createToken($request->token_name);
+        return ['token' => $token->plainTextToken];
+
+    }
+
+    public function createToken()
+    {
+        return view('dashboard.pages.createToken');
+    }
+
 }
