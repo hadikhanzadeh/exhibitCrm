@@ -30,7 +30,8 @@ class HomeController extends Controller
 
     public function tourRequest(Request $request)
     {
-        $tourRequests = tourRequest::all()->take(10);
+
+        $tourRequests = tourRequest::where('lang', '=', app()->getLocale())->paginate(2);
         return view('dashboard.pages.tour-request', ['items' => $tourRequests]);
     }
 

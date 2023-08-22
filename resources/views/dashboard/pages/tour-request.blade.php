@@ -20,7 +20,8 @@
                     </div>
                 </header>
                 <div class="content">
-                    <table class="table table-striped table-bordered">
+                    <table
+                        class="table wbs-profile-table table-borderless table-head-bg">
                         <thead>
                         <tr>
                             <th>#</th>
@@ -29,8 +30,7 @@
                             <th>شهر</th>
                             <th>نام شرکت</th>
                             <th>نام مسئول</th>
-                            <th>حوزه</th>
-                            <th>تعداد شرکت کنندگان</th>
+                            <th>شرکت کنندگان</th>
                             <th>شماره تماس</th>
                             <th>وضعیت</th>
                             <th>عملیات</th>
@@ -44,16 +44,18 @@
                             @foreach($items as  $item)
                                 <tr>
                                     <td>{{ $i }}</td>
-                                    <td>{{ $item->exhibition_title }}</td>
-                                    <td>{{ $item->country_title }}</td>
-                                    <td>{{ $item->city_title }}</td>
-                                    <td>{{ $item->company_name }}</td>
-                                    <td>{{ $item->manager }}</td>
-                                    <td>{{ $item->activity_area_title }}</td>
+                                    <td>{!!  $item->exhibition_title !!}</td>
+                                    <td>{!! $item->country_title !!}</td>
+                                    <td>{!! $item->city_title !!}</td>
+                                    <td>{!! $item->company_name !!}</td>
+                                    <td>{!! $item->manager !!}</td>
                                     <td>{{ $item->participants }}</td>
                                     <td>{{ $item->mobile }}</td>
                                     <td>{!!  \App\Http\Lib\wbsUtility::getStatus($item->status) !!}</td>
-                                    <td>عملیات های موردنظر</td>
+                                    <td class="action">
+                                        <a href="#"><i class="icon-eye-2"></i></a>
+                                        <a href="#"><i class="icon-cancel-2"></i></a>
+                                    </td>
                                 </tr>
                                 @php
                                     $i++;
@@ -62,6 +64,11 @@
                         @endif
                         </tbody>
                     </table>
+                    @if ($items->links()->paginator->hasPages())
+                        <div class="wbs-paginate">
+                            {{ $items->links() }}
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

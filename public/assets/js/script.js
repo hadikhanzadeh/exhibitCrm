@@ -30,6 +30,21 @@ jQuery(function ($) {
         $('#city').removeAttr('disabled');
     });
 
+    $("#searchInTable").on("keyup", function () {
+        const _this = $(this);
+        var value = $(this).val().toLowerCase();
+        _this.parents('.main-content').find(".content table tbody tr:not(.not-found)").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+        if (_this.parents('.main-content').find(".content table tbody tr:not(.not-found):visible").length === 0) {
+            if ($('.not-found').length === 0) {
+                _this.parents('.main-content').find(".content table tbody").append('<tr class="not-found"><td colspan="10" class="text-center">موردی یافت نشد!</td></tr>');
+            }
+        } else {
+            $('.not-found').remove();
+        }
+    });
+
     new mds.MdsPersianDateTimePicker(document.getElementById('from_date'), {
         groupId: 'filterDate',
         targetTextSelector: '#from_date',

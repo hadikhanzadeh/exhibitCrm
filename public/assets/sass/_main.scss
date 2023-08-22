@@ -1,7 +1,7 @@
 #site-main {
     margin-top: 40px;
     padding-right: 32px;
-
+    padding-left: 32px;
     .title {
         margin-bottom: 25px;
 
@@ -23,21 +23,6 @@
             h2 {
                 font-size: 17px;
                 margin: 0;
-            }
-        }
-
-        .wbs-table {
-            border: 1px solid #e7eaf0;
-            border-radius: 10px;
-
-            .content {
-                border: none;
-                padding: 0 15px 15px;
-
-                table {
-                    margin: 0;
-                    width: 100%;
-                }
             }
         }
     }
