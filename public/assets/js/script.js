@@ -25,6 +25,9 @@ jQuery(function ($) {
     });
 
 
+    if ($('#country option:selected').length > 0) {
+        wbsSelect2Ajax('#city', {country: $('#country').val()});
+    }
     body.on('change', '#country', function () {
         wbsSelect2Ajax('#city', {country: $('#country').val()});
         $('#city').removeAttr('disabled');

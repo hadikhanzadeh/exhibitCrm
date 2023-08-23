@@ -47,6 +47,14 @@
                 select {
                     width: 100%;
                 }
+
+                &:last-child {
+                    width: 9%;
+
+                    label {
+                        margin-bottom: 5px;
+                    }
+                }
             }
         }
     }

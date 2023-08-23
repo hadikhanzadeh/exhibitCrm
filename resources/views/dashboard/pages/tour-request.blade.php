@@ -25,6 +25,7 @@
                         <thead>
                         <tr>
                             <th>#</th>
+                            <th>تاریخ</th>
                             <th>عنوان نمایشگاه</th>
                             <th>کشور</th>
                             <th>شهر</th>
@@ -37,14 +38,15 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @if(!empty($items))
+                        @if(!$items->isEmpty())
                             @php
                                 $i = 1;
                             @endphp
                             @foreach($items as  $item)
                                 <tr>
                                     <td>{{ $i }}</td>
-                                    <td>{!!  $item->exhibition_title !!}</td>
+                                    <td dir="ltr">{!! verta($item->created_at) !!}</td>
+                                    <td>{!! $item->exhibition_title !!}</td>
                                     <td>{!! $item->country_title !!}</td>
                                     <td>{!! $item->city_title !!}</td>
                                     <td>{!! $item->company_name !!}</td>
@@ -61,6 +63,12 @@
                                     $i++;
                                 @endphp
                             @endforeach()
+                        @else
+                            <tr>
+                                <td colspan="10" class="text-center">
+                                    موردی یافت نشد!
+                                </td>
+                            </tr>
                         @endif
                         </tbody>
                     </table>
