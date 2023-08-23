@@ -50,6 +50,7 @@ jQuery(function ($) {
 
     new mds.MdsPersianDateTimePicker(document.getElementById('from_date'), {
         groupId: 'filterDate',
+        selectedDate: new Date($('#from_date_en').val()),
         targetTextSelector: '#from_date',
         targetDateSelector: '#from_date_en',
         fromDate: true
@@ -57,6 +58,7 @@ jQuery(function ($) {
 
     new mds.MdsPersianDateTimePicker(document.getElementById('to_date'), {
         groupId: 'filterDate',
+        selectedDate: new Date($('#to_date_en').val()),
         targetTextSelector: '#to_date',
         targetDateSelector: '#to_date_en',
         toDate: true

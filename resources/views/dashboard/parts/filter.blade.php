@@ -74,7 +74,7 @@
                         <input dir="ltr" type="hidden"
                                id="to_date_en"
                                name="to_date_en"
-                               class="form-control"/>
+                               class="form-control" value="{{ request('to_date_en') }}"/>
                     </fieldset>
                     <fieldset>
                         <label class="form-label">وضعیت</label>
