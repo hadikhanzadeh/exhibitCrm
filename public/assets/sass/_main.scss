@@ -1,7 +1,8 @@
 #site-main {
     margin-top: 40px;
-    padding-right: 32px;
     padding-left: 32px;
+    padding-right: 32px;
+
     .title {
         margin-bottom: 25px;
 
@@ -19,6 +20,14 @@
             display: flex;
             justify-content: space-between;
             margin-bottom: 15px;
+
+            h1 {
+                font-size: 27px;
+                margin: {
+                    bottom: 10px;
+                    top: 0;
+                };
+            }
 
             h2 {
                 font-size: 17px;

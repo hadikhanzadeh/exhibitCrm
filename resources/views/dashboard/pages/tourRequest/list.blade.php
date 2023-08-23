@@ -55,7 +55,8 @@
                                     <td>{{ $item->mobile }}</td>
                                     <td>{!!  \App\Http\Lib\wbsUtility::getStatus($item->status) !!}</td>
                                     <td class="action">
-                                        <a href="#"><i class="icon-eye-2"></i></a>
+                                        <a href="{{ route('dashboard.viewTourRequest',$item->id) }}"><i
+                                                class="icon-eye-2"></i></a>
                                         <a href="#"><i class="icon-cancel-2"></i></a>
                                     </td>
                                 </tr>

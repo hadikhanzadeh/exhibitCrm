@@ -88,7 +88,16 @@ class HomeController extends Controller
             ];
             $taxData = $crmAPI->request($reqData);
         }
-        return view('dashboard.pages.tour-request', ['items' => $tourRequests, 'taxData' => $taxData]);
+        return view('dashboard.pages.tourRequest.list', ['items' => $tourRequests, 'taxData' => $taxData]);
+    }
+
+    public function viewTourRequest(Request $request)
+    {
+        $tourRequest = tourRequest::where('id', '=', $request->id)->get();
+        if ($tourRequest->isEmpty()) {
+            return view('dashboard.error');
+        }
+        return view('dashboard.pages.tourRequest.view', ['item' => $tourRequest[0]]);
     }
 
     public function generateToken(Request $request)
