@@ -1,6 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
+    @if (\Session::has('success'))
+        <div class="row">
+            <div class="col-12">
+                <div class="alert alert-success">
+                    {!! \Session::get('success') !!}
+                </div>
+            </div>
+        </div>
+    @endif
+
     <div class="row">
         <div class="col-12">
             <div class="title">
@@ -8,6 +18,7 @@
             </div>
         </div>
     </div>
+
     @include('dashboard.parts.filter')
 
     <div class="row">
@@ -57,7 +68,9 @@
                                     <td class="action">
                                         <a href="{{ route('dashboard.viewTourRequest',$item->id) }}"><i
                                                 class="icon-eye-2"></i></a>
-                                        <a href="#"><i class="icon-cancel-2"></i></a>
+                                        <a class="delete-item"
+                                           href="{{ route('dashboard.destroyTourRequest',$item->id)  }}"><i
+                                                class="icon-cancel-2"></i></a>
                                     </td>
                                 </tr>
                                 @php

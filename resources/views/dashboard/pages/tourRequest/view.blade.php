@@ -5,44 +5,41 @@
         <div class="wbs-form-content main-content m-0 col-12">
             <header>
                 <h1>مشاهده درخواست تور</h1>
+                <a class="btn btn-outline-primary" href="{{ route('dashboard.tourRequest') }}">{{ __('back') }}</a>
             </header>
-            <form method="post" action="">
+            @if(Session::has('success'))
+                <div class="alert alert-success">
+                    {{Session::get('success')}}
+                </div>
+                @php
+                    Session::remove('success');
+                @endphp
+            @elseif(Session::has('error'))
+                <div class="alert alert-danger">
+                    {{Session::get('error')}}
+                </div>
+                @php
+                    Session::remove('error');
+                @endphp
+            @endif
+            <form method="post" action="{{ route('dashboard.updateTourRequest', $item->id) }}">
+                @csrf
                 <div class="row mb-3">
                     <fieldset class="col-md-3">
                         <label class="form-label">کشور</label>
-                        <select data-url="{{ route('dashboard.getCountries') }}" id="country"
-                                class="wbsAjaxSelect2"
-                                name="country">
-                            <option selected
-                                    value="{{ $item->country }}">{{ $item->country_title }}</option>
-                        </select>
+                        <p>{!! $item->country_title !!}</p>
                     </fieldset>
                     <fieldset class="col-md-3">
                         <label class="form-label">شهر</label>
-                        <select
-                            data-url="{{ route('dashboard.getCites') }}"
-                            id="city"
-                            class="wbsAjaxSelect2"
-                            name="city">
-                            <option selected
-                                    value="{{ $item->city }}">{{ $item->city_title }}</option>
-                        </select>
+                        <p>{!! $item->city_title !!}</p>
                     </fieldset>
                     <fieldset class="col-md-3">
                         <label class="form-label">حوزه</label>
-                        <select data-url="{{ route('dashboard.getGenre') }}" id="genre"
-                                class="wbsAjaxSelect2"
-                                name="genre">
-                            <option selected
-                                    value="{{ $item->activity_area }}">{{ $item->activity_area_title }}</option>
-                        </select>
+                        <p>{!! $item->activity_area_title !!}</p>
                     </fieldset>
                     <fieldset class="col-md-3">
                         <label class="form-label">نمایشگاه</label>
-                        <select disabled name="exhibition" class="form-select">
-                            <option selected
-                                    value="{{ $item->exhibition }}">{{ $item->exhibition_title }}</option>
-                        </select>
+                        <p>{!! $item->exhibition_title !!}</p>
                     </fieldset>
                 </div>
                 <div class="row mb-3">
@@ -58,7 +55,7 @@
                     </fieldset>
                     <fieldset class="col-md-3">
                         <label for="mobile" class="form-label">شماره تماس</label>
-                        <input class="form-control" name="mobile" id="mobile" value="{{ $item->mobile }}"
+                        <input dir="ltr" class="form-control" name="mobile" id="mobile" value="{{ $item->mobile }}"
                                type="text">
                     </fieldset>
                     <fieldset class="col-md-3">
@@ -69,7 +66,7 @@
                 <div class="row mb-3">
                     <fieldset class="col-md-3">
                         <label for="user_id" class="form-label">مسئول ثبت</label>
-                        <input class="form-control" name="user_id" id="user_id"
+                        <input disabled class="form-control" name="user_id" id="user_id"
                                value="{{ $item->user_id }}"
                                type="text">
                     </fieldset>
@@ -80,7 +77,7 @@
                     </fieldset>
                     <fieldset class="col-md-3">
                         <label for="tracking_code" class="form-label">کد پیگیری</label>
-                        <input dir="ltr" class="form-control" name="tracking_code" id="tracking_code"
+                        <input disabled dir="ltr" class="form-control"
                                value="{{ $item->tracking_code }}"
                                type="text">
                     </fieldset>
@@ -88,13 +85,13 @@
                         <label for="status" class="form-label">وضعیت</label>
                         <select name="status" id="status" class="form-select">
                             <option value="0">انتخاب کنید...</option>
-                            <option {{ request('status') === 'pending' ? 'selected': '' }} value="pending">در انتظار
+                            <option {{ $item->status === 'pending' ? 'selected': '' }} value="pending">در انتظار
                                 بررسی
                             </option>
-                            <option {{ request('status') === 'awaiting' ? 'selected': '' }} value="awaiting">در حال
+                            <option {{ $item->status === 'awaiting' ? 'selected': '' }} value="awaiting">در حال
                                 رسیدگی
                             </option>
-                            <option {{ request('status') === 'pending' ? 'complete': '' }} value="complete">تکمیل شده
+                            <option {{ $item->status === 'pending' ? 'complete': '' }} value="complete">تکمیل شده
                             </option>
                         </select>
                     </fieldset>
@@ -116,9 +113,11 @@
 
                 <div class="row mt-5 justify-content-between">
                     <div class="col-2">
-                        <button type="button" class="btn btn-danger">حذف</button>
+                        <a href="{{ route('dashboard.destroyTourRequest', $item->id) }}"
+                           class="btn btn-danger delete-item">حذف</a>
                     </div>
                     <div class="col-2 text-end">
+                        <input type="hidden" value="{{$item->id}}" name="id">
                         <button type="submit" class="btn btn-primary">ذخیره تغییرات</button>
                     </div>
                 </div>

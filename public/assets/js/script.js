@@ -28,7 +28,9 @@ jQuery(function ($) {
     if ($('#country option:selected').length > 0) {
         wbsSelect2Ajax('#city', {country: $('#country').val()});
     }
+
     body.on('change', '#country', function () {
+        $('#countryTitle').val($('#country option:selected').text());
         wbsSelect2Ajax('#city', {country: $('#country').val()});
         $('#city').removeAttr('disabled');
     });
@@ -48,20 +50,28 @@ jQuery(function ($) {
         }
     });
 
-    new mds.MdsPersianDateTimePicker(document.getElementById('from_date'), {
-        groupId: 'filterDate',
-        selectedDate: new Date($('#from_date_en').val()),
-        targetTextSelector: '#from_date',
-        targetDateSelector: '#from_date_en',
-        fromDate: true
-    });
+    if ($('#from_date').length > 0) {
+        new mds.MdsPersianDateTimePicker(document.getElementById('from_date'), {
+            groupId: 'filterDate',
+            selectedDate: $('#from_date_en').val().length > 0 ? new Date($('#from_date_en').val()) : undefined,
+            targetTextSelector: '#from_date',
+            targetDateSelector: '#from_date_en',
+            fromDate: true
+        });
 
-    new mds.MdsPersianDateTimePicker(document.getElementById('to_date'), {
-        groupId: 'filterDate',
-        selectedDate: new Date($('#to_date_en').val()),
-        targetTextSelector: '#to_date',
-        targetDateSelector: '#to_date_en',
-        toDate: true
+        new mds.MdsPersianDateTimePicker(document.getElementById('to_date'), {
+            groupId: 'filterDate',
+            selectedDate: $('#to_date_en').val().length > 0 ? new Date($('#to_date_en').val()) : undefined,
+            targetTextSelector: '#to_date',
+            targetDateSelector: '#to_date_en',
+            toDate: true
+        });
+    }
+
+    body.on('click', '.delete-item', function () {
+        if (!confirm("آیا از حذف آیتم مورد نظر مطمئن هستید؟") === true) {
+            return false;
+        }
     });
 
     function is_select2(elem = '.is-select2') {
