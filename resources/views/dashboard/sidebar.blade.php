@@ -7,13 +7,13 @@
         <div class="menu">
             <ul>
                 <li>
-                    <a class="active" href="#">
+                    <a {!! request()->routeIs('dashboard.index') ? 'class="active"' : '' !!} href="{{ route('dashboard.index') }}">
                         <i class="icon-sliders"></i>
                         داشبورد
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('dashboard.tourRequest') }}">
+                    <a {!! request()->routeIs('dashboard.tourRequest') ? 'class="active"' : '' !!} href="{{ route('dashboard.tourRequest') }}">
                         <i class="icon-first-order"></i>
                         درخواست ها تور نمایشگاهی
                     </a>
