@@ -13,9 +13,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{{ route('dashboard.tourRequest') }}">
                         <i class="icon-first-order"></i>
-                        درخواست غرفه سازی
+                        درخواست ها تور نمایشگاهی
                     </a>
                 </li>
                 <li>

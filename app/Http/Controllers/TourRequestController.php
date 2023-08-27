@@ -78,14 +78,6 @@ class TourRequestController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(StoretourRequestRequest $request)
@@ -103,14 +95,6 @@ class TourRequestController extends Controller
             return view('dashboard.error');
         }
         return view('dashboard.pages.tourRequest.view', ['item' => $tourRequest[0]]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(tourRequest $tourRequest)
-    {
-        //
     }
 
     /**
