@@ -7,6 +7,7 @@ use App\Http\Lib\wbsUtility;
 use App\Models\tourRequest;
 use App\Http\Requests\StoretourRequestRequest;
 use App\Http\Requests\UpdatetourRequestRequest;
+use DB;
 use Illuminate\Http\Request;
 use Validator;
 
@@ -51,8 +52,9 @@ class TourRequestController extends Controller
                 $query->where('status', 'like', $status);
             }
 
-        })->paginate(2)->appends($request->all());
-
+        })
+            ->orderBy('created_at', 'desc')
+            ->select('exhibition_id', 'country_title', 'city_title', 'exhibition_title', DB::raw('COUNT(id) as totalCount'), DB::raw('SUM(participants) as totalParticipants'))->take(5)->groupBy('exhibition_id')->get();
         $params = [];
         if ($request->has('country')) {
             $params['country'] = $request->get('country');
@@ -77,6 +79,71 @@ class TourRequestController extends Controller
         return view('dashboard.pages.tourRequest.list', ['items' => $tourRequests, 'taxData' => $taxData]);
     }
 
+    public function groupIndex(Request $request)
+    {
+        $tourRequests = tourRequest::where(function ($query) use ($request) {
+            $query->where('lang', '=', app()->getLocale());
+            $query->where('exhibition_id', '=', $request->exhibit_id);
+
+            $title = $request->has('title') ? $request->get('title') : null;
+            $country = $request->has('country') ? $request->get('country') : null;
+            $city = $request->has('city') ? $request->get('city') : null;
+            $genre = $request->has('genre') ? $request->get('genre') : null;
+            $fromDate = $request->has('from_date_en') ? $request->get('from_date_en') : null;
+            $toDate = $request->has('to_date_en') ? $request->get('to_date_en') : null;
+            $status = $request->has('status') ? $request->get('status') : null;
+
+            if (isset($title)) {
+                $query->where('exhibition_title', 'LIKE', '%' . $title . '%');
+            }
+            if (!empty($country)) {
+                $query->where('country', '=', $country);
+            }
+            if (!empty($city)) {
+                $query->whereIn('city', $city);
+            }
+            if (!empty($genre)) {
+                $query->whereIn('activity_area', $genre);
+            }
+
+            if (!empty($fromDate)) {
+                if (!empty($toDate)) {
+                    $query->whereBetween('created_at', [$fromDate, $toDate]);
+                } else {
+                    $query->whereDate('created_at', '=', $fromDate);
+                }
+            }
+
+            if (!empty($status)) {
+                $query->where('status', 'like', $status);
+            }
+
+        })->orderBy('created_at', 'desc')->paginate(2)->appends($request->all());
+
+        $params = [];
+        if ($request->has('country')) {
+            $params['country'] = $request->get('country');
+        }
+        if ($request->has('city')) {
+            $params['city'] = $request->get('city');
+        }
+        if ($request->has('genre')) {
+            $params['genre'] = $request->get('genre');
+        }
+        $taxData = [];
+        if (!empty($params)) {
+            $crmAPI = new crmAPI();
+            $reqData = [
+                'data' => [
+                    'action' => 'getTaxData',
+                    'params' => $params
+                ]
+            ];
+            $taxData = $crmAPI->request($reqData);
+        }
+        return view('dashboard.pages.tourRequest.group-list', ['items' => $tourRequests, 'taxData' => $taxData]);
+    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -92,6 +159,7 @@ class TourRequestController extends Controller
             'genre' => 'required|array',
             'phone' => 'required|string',
             'email' => 'email',
+            'responsible' => 'required|string',
             'ceo-name' => 'required|string',
             'participants' => 'required|integer'
         ]);
@@ -117,6 +185,7 @@ class TourRequestController extends Controller
             $tourRequest->participants = $request->get('participants');
             $tourRequest->email = $request->get('email');
             $tourRequest->manager = $request->get('ceo-name');
+            $tourRequest->responsible = $request->get('responsible');
             $tourRequest->tracking_code = $trackingCode;
             $tourRequest->lang = $request->get('lang');
 

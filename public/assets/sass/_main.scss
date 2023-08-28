@@ -4,6 +4,8 @@
     padding-right: 32px;
 
     .title {
+        display: flex;
+        justify-content: space-between;
         margin-bottom: 25px;
 
         h1 {

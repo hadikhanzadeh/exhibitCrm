@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('tour_requests', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->nullable();
+            $table->bigInteger('user_id');
             $table->string('company_name'); //نام شرکت
             $table->bigInteger('exhibition_id'); //آی دی نمایشگاه
             $table->string('exhibition_title', 255); //عنوان نمایشگاه
@@ -24,6 +24,7 @@ return new class extends Migration {
             $table->integer('participants')->nullable(); //تعداد شرکت کنندگان
             $table->string('email'); //ایمیل
             $table->string('manager')->nullable(); //نام و نام خانوادگی مدیرعامل
+            $table->string('responsible', 100); //نام و نام خانوادگی ثبت کننده
             $table->string('tracking_code'); //کد رهگیری
             $table->bigInteger('activity_area')->nullable();
             $table->string('activity_area_title', 255)->nullable();

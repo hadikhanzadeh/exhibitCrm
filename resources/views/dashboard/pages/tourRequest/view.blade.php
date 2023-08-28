@@ -5,7 +5,7 @@
         <div class="wbs-form-content main-content m-0 col-12">
             <header>
                 <h1>مشاهده درخواست تور</h1>
-                <a class="btn btn-outline-primary" href="{{ route('dashboard.tourRequest') }}">{{ __('back') }}</a>
+                <a class="btn btn-outline-primary" href="{{ url()->previous() }}">{{ __('back') }}</a>
             </header>
             @if(Session::has('success'))
                 <div class="alert alert-success">
@@ -67,7 +67,7 @@
                     <fieldset class="col-md-3">
                         <label for="user_id" class="form-label">مسئول ثبت</label>
                         <input disabled class="form-control" name="user_id" id="user_id"
-                               value="{{ $item->user_id }}"
+                               value="{{ $item->responsible }}"
                                type="text">
                     </fieldset>
                     <fieldset class="col-md-3">
