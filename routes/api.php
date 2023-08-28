@@ -14,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['auth:sanctum'])->post('/tourRequest', [\App\Http\Controllers\API\TourRequestController::class, 'store']);
+Route::middleware(['auth:sanctum'])->post('/tourRequest', [\App\Http\Controllers\TourRequestController::class, 'store']);
 
