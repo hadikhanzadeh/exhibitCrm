@@ -9,25 +9,19 @@
                 <li>
                     <a {!! request()->routeIs('dashboard.index') ? 'class="active"' : '' !!} href="{{ route('dashboard.index') }}">
                         <i class="icon-sliders"></i>
-                        داشبورد
+                        {{ __('Dashboard') }}
                     </a>
                 </li>
                 <li>
                     <a {!! request()->routeIs('dashboard.tourRequest') ? 'class="active"' : '' !!} href="{{ route('dashboard.tourRequest') }}">
                         <i class="icon-first-order"></i>
-                        درخواست ها تور نمایشگاهی
+                        {{ __('Tour Requests') }}
                     </a>
                 </li>
                 <li>
                     <a href="#">
                         <i class="icon-first-order"></i>
-                        درخواست غرفه سازی
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="icon-first-order"></i>
-                        درخواست غرفه سازی
+                        {{ __('Booth Making Requests') }}
                     </a>
                 </li>
             </ul>

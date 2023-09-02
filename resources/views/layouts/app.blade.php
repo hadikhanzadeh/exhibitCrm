@@ -18,7 +18,7 @@
 </head>
 <body dir="{{ app()->getLocale() !== 'fa' ? 'ltr' : 'rtl' }}">
 @include('dashboard.sidebar')
-<div class="page-content">
+<div class="page-content is-{{ app()->getLocale() !== 'fa' ? 'ltr' : 'rtl' }}">
     <header id="site-header">
         <div class="container-fluid">
             <div class="row justify-content-between">

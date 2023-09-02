@@ -2,7 +2,7 @@
     <div class="col-12">
         <div class="wbs-panel">
             <header class="open">
-                <h2>فیلتر نتایج</h2>
+                <h2>{{ __('Filter results') }}</h2>
                 <span><i class="icon-down-open-1"></i></span>
             </header>
             <div class="content">
@@ -10,7 +10,7 @@
                     @csrf
                     @if(!in_array('exhibition_title',$excludeFields))
                         <fieldset>
-                            <label class="form-label">عنوان نمایشگاه</label>
+                            <label class="form-label">{{ __('The title of the exhibition') }}</label>
                             <input type="text"
                                    value="{{ request('title') }}"
                                    name=" title"
@@ -19,7 +19,7 @@
                     @endif
                     @if(!in_array('country',$excludeFields))
                         <fieldset>
-                            <label class="form-label">کشور</label>
+                            <label class="form-label">{{ __('Country') }}</label>
                             <select data-url="{{ route('dashboard.getCountries') }}" id="country"
                                     class="wbsAjaxSelect2"
                                     name="country">
@@ -32,7 +32,7 @@
                     @endif
                     @if(!in_array('city',$excludeFields))
                         <fieldset>
-                            <label class="form-label">شهر</label>
+                            <label class="form-label">{{ __('City') }}</label>
                             <select multiple
                                     {{ empty($taxData['city']) ? 'disabled' : '' }} data-url="{{ route('dashboard.getCites') }}"
                                     id="city"
@@ -49,7 +49,7 @@
                     @endif
                     @if(!in_array('genre',$excludeFields))
                         <fieldset>
-                            <label class="form-label">حوزه</label>
+                            <label class="form-label">{{ __('Activity Area') }}</label>
                             <select multiple data-url="{{ route('dashboard.getGenre') }}" id="genre"
                                     class="wbsAjaxSelect2"
                                     name="genre[]">
@@ -64,7 +64,7 @@
                     @endif
                     @if(!in_array('date',$excludeFields))
                         <fieldset>
-                            <label class="form-label">از تاریخ</label>
+                            <label class="form-label">{{ __('From Date') }}</label>
                             <input autocomplete="off" dir="ltr" type="text"
                                    id="from_date"
                                    name="from_date"
@@ -75,7 +75,7 @@
                                    class="form-control" value="{{ request('from_date_en') }}"/>
                         </fieldset>
                         <fieldset>
-                            <label class="form-label">تا تاریخ</label>
+                            <label class="form-label">{{ __('To Date') }}</label>
                             <input autocomplete="off" dir="ltr" type="text"
                                    id="to_date"
                                    name="to_date"
@@ -88,24 +88,24 @@
                     @endif
                     @if(!in_array('status',$excludeFields))
                         <fieldset>
-                            <label class="form-label">وضعیت</label>
+                            <label class="form-label">{{ __('Status') }}</label>
                             <select name="status" class="form-select">
-                                <option value="0">انتخاب کنید...</option>
-                                <option {{ request('status') === 'pending' ? 'selected': '' }} value="pending">در انتظار
-                                    بررسی
+                                <option value="0">{{ __('Select...') }}</option>
+                                <option {{ request('status') === 'pending' ? 'selected': '' }} value="pending">
+                                    {{ __('Pending') }}
                                 </option>
-                                <option {{ request('status') === 'awaiting' ? 'selected': '' }} value="awaiting">در حال
-                                    رسیدگی
+                                <option {{ request('status') === 'awaiting' ? 'selected': '' }} value="awaiting">
+                                    {{ __('Awaiting') }}
                                 </option>
-                                <option {{ request('status') === 'pending' ? 'complete': '' }} value="complete">تکمیل
-                                    شده
+                                <option {{ request('status') === 'pending' ? 'complete': '' }} value="complete">
+                                    {{ __('Completed') }}
                                 </option>
                             </select>
                         </fieldset>
                     @endif
                     <fieldset>
-                        <label>عملیات</label>
-                        <button type="submit" class="btn btn-primary">جستجو</button>
+                        <label>{{ __('Operation') }}</label>
+                        <button type="submit" class="btn btn-primary">{{__('Search')}}</button>
                     </fieldset>
                 </form>
             </div>

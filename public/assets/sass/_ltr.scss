@@ -12,4 +12,32 @@
     .login-submit-btn {
         text-align: right !important;
     }
+
+    .wbs-profile-table {
+        tr {
+            th {
+                &:first-of-type {
+                    border-top-left-radius: 10px;
+                    border-top-right-radius: 0;
+                }
+
+                &:last-of-type {
+                    border-top-left-radius: 0;
+                    border-top-right-radius: 10px;
+                }
+            }
+
+            &:last-child {
+                td:first-of-type {
+                    border-bottom-left-radius: 10px;
+                    border-bottom-right-radius: 0;
+                }
+
+                td:last-of-type {
+                    border-bottom-left-radius: 0;
+                    border-bottom-right-radius: 10px;
+                }
+            }
+        }
+    }
 }

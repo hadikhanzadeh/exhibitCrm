@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-12">
             <header class="title">
-                <h1>درخواست های تور برای {{ $items[0]->exhibition_title }}</h1>
+                <h1> {{ __('Tour requests for ') . $items[0]->exhibition_title }}</h1>
                 <a class="btn btn-outline-primary" href="{{ route('dashboard.tourRequest') }}">{{ __('back') }}</a>
             </header>
         </div>
@@ -26,9 +26,10 @@
         <div class="col-12">
             <div class="main-content">
                 <header>
-                    <h2>نتایج</h2>
+                    <h2>{{ __('Results') }}</h2>
                     <div class="left-side">
-                        <input type="text" id="searchInTable" class="form-control" placeholder="جستجو در نتایج..."/>
+                        <input type="text" id="searchInTable" class="form-control"
+                               placeholder="{{ __('Search in results...') }}"/>
                     </div>
                 </header>
                 <div class="content">
@@ -37,15 +38,15 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>تاریخ</th>
-                            <th>کشور</th>
-                            <th>شهر</th>
-                            <th>نام شرکت</th>
-                            <th>نام مسئول</th>
-                            <th>شرکت کنندگان</th>
-                            <th>شماره تماس</th>
-                            <th>وضعیت</th>
-                            <th>عملیات</th>
+                            <th>{{ __('Date') }}</th>
+                            <th>{{ __('Country') }}</th>
+                            <th>{{ __('City') }}</th>
+                            <th>{{ __('Company Name') }}</th>
+                            <th>{{ __('Name of Responsible') }}</th>
+                            <th>{{ __('Participants') }}</th>
+                            <th>{{ __('Phone number') }}</th>
+                            <th>{{ __('Status') }}</th>
+                            <th>{{ __('Operation') }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -79,7 +80,7 @@
                         @else
                             <tr>
                                 <td colspan="10" class="text-center">
-                                    موردی یافت نشد!
+                                    {{ __('Nothing found!') }}
                                 </td>
                             </tr>
                         @endif

@@ -7,13 +7,21 @@ body {
     @import 'sidebar';
 
     .page-content {
-        margin-right: 250px;
+        &.is-rtl {
+            margin-right: 250px;
+        }
+
+        &.is-ltr {
+            margin-left: 250px;
+        }
+
         @import 'global';
         @import 'header';
         @import 'main';
         @import 'profile-table';
 
-        @import 'ltr';
     }
+
+    @import 'ltr';
 }
 

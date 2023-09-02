@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-    خطا! صفحه ای که به دنبال آن می گردید وجود ندارد!
+    {{ _e('Error! The page you are looking for does not exist!') }}
 @endsection

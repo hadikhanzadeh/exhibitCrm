@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-12">
             <div class="title">
-                <h1>درخواست های تور</h1>
+                <h1>{{ __('Tour Requests') }}</h1>
             </div>
         </div>
     </div>
@@ -25,9 +25,10 @@
         <div class="col-12">
             <div class="main-content">
                 <header>
-                    <h2>نتایج</h2>
+                    <h2>{{ __('Results') }}</h2>
                     <div class="left-side">
-                        <input type="text" id="searchInTable" class="form-control" placeholder="جستجو در نتایج..."/>
+                        <input type="text" id="searchInTable" class="form-control"
+                               placeholder="{{ __('Search in results...') }}"/>
                     </div>
                 </header>
                 <div class="content">
@@ -36,12 +37,12 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>عنوان نمایشگاه</th>
-                            <th>کشور</th>
-                            <th>شهر</th>
-                            <th>مجموع درخواست ها</th>
-                            <th>مجموع شرکت کنندگان</th>
-                            <th>عملیات</th>
+                            <th>{{__('The title of the exhibition')}}</th>
+                            <th>{{ __('Country') }}</th>
+                            <th>{{ __('City') }}</th>
+                            <th> {{ __('Total requests') }}</th>
+                            <th>{{ __('Total participants') }}</th>
+                            <th>{{ __('Operation') }}</th>
                         </tr>
                         </thead>
                         <tbody>

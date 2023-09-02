@@ -53,6 +53,7 @@ class TourRequestController extends Controller
             }
 
         })
+            ->orderBy('totalParticipants', 'desc')
             ->orderBy('created_at', 'desc')
             ->select('exhibition_id', 'country_title', 'city_title', 'exhibition_title', DB::raw('COUNT(id) as totalCount'), DB::raw('SUM(participants) as totalParticipants'))->take(5)->groupBy('exhibition_id')->get();
         $params = [];
@@ -118,7 +119,7 @@ class TourRequestController extends Controller
                 $query->where('status', 'like', $status);
             }
 
-        })->orderBy('created_at', 'desc')->paginate(2)->appends($request->all());
+        })->orderBy('participants', 'desc')->orderBy('created_at', 'desc')->paginate(2)->appends($request->all());
 
         $params = [];
         if ($request->has('country')) {
