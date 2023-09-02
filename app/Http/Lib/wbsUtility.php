@@ -7,9 +7,9 @@ class wbsUtility
     public static function getStatus(string $status): string
     {
         return match ($status) {
-            'awaiting' => '<span class="wbs-status isBtn awaiting">در حال رسیدگی</span>',
-            'complete' => '<span class="wbs-status isBtn complete">تکمیل شده</span>',
-            default => '<span class="wbs-status isBtn pending">در انتظار بررسی</span>',
+            'awaiting' => '<span class="wbs-status isBtn awaiting">' . __('Awaiting') . '</span>',
+            'complete' => '<span class="wbs-status isBtn complete">' . __('Completed') . '</span>',
+            default => '<span class="wbs-status isBtn pending">' . __('Pending') . '</span>',
         };
     }
 

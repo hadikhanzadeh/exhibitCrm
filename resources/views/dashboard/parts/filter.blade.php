@@ -68,7 +68,8 @@
                             <input autocomplete="off" dir="ltr" type="text"
                                    id="from_date"
                                    name="from_date"
-                                   class="form-control" value="{{ verta(request('from_date_en')) }}"/>
+                                   class="form-control"
+                                   value="{{ app()->getLocale() === 'fa' ? verta(request('from_date_en')) : request('from_date_en') }}"/>
                             <input dir="ltr" type="hidden"
                                    id="from_date_en"
                                    name="from_date_en"
@@ -79,6 +80,7 @@
                             <input autocomplete="off" dir="ltr" type="text"
                                    id="to_date"
                                    name="to_date"
+                                   value="{{ app()->getLocale() === 'fa' ? verta(request('to_date_en')) : request('to_date_en') }}"
                                    class="form-control"/>
                             <input dir="ltr" type="hidden"
                                    id="to_date_en"

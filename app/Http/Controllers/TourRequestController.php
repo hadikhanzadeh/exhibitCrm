@@ -166,7 +166,7 @@ class TourRequestController extends Controller
         ]);
 
         if (!$validator->passes()) {
-            return json_encode(['status' => 'error', 'message' => 'اطلاعات ارسالی صحیح نمی باشد! لطفا اطلاعات خود به دقت بررسی نمایید.']);
+            return json_encode(['status' => 'error', 'message' => __('The information sent is not correct! Please check your information carefully.')]);
         }
 
         try {
@@ -191,10 +191,10 @@ class TourRequestController extends Controller
             $tourRequest->lang = $request->get('lang');
 
             $tourRequest->save();
-            return json_encode(['status' => 'success', 'message' => 'درخواست شما با موفقیت ثبت گردید. کد پیگیری شما : ' . $trackingCode]);
+            return json_encode(['status' => 'success', 'message' => __('Your request has been successfully registered. Your tracking code: ') . $trackingCode]);
         } catch (\Exception $e) {
             dd($e->getMessage());
-            return json_encode(['status' => 'error', 'message' => 'خطایی در پردازش اطلاعات ارسالی وجود دارد! لطفا با پشتیبانی مطرح نمایید.']);
+            return json_encode(['status' => 'error', 'message' => __('There is an error processing the sent information! Please raise with support.')]);
         }
     }
 
@@ -227,13 +227,13 @@ class TourRequestController extends Controller
         ]);
 
         if (!$validator->passes()) {
-            $request->session()->flash('error', 'خطایی در پردازش اطلاعات ارسالی وجود دارد! لطفا با پشتیبانی مطرح نمایید.');
+            $request->session()->flash('error', __('There is an error processing the sent information! Please raise with support.'));
             return redirect()->back();
         }
         $id = $request->get('id');
         $tourRequest = tourRequest::find($id);
         if (!$tourRequest) {
-            $request->session()->flash('error', 'خطایی در پردازش اطلاعات ارسالی وجود دارد! لطفا با پشتیبانی مطرح نمایید.');
+            $request->session()->flash('error', __('There is an error processing the sent information! Please raise with support.'));
             return redirect()->back();
         }
 
@@ -247,10 +247,10 @@ class TourRequestController extends Controller
             $tourRequest->operator_id = \Auth::id();
 
             $tourRequest->save();
-            $request->session()->flash('success', 'اطلاعات مورد نظر با موفقیت به روز رسانی گردید.');
+            $request->session()->flash('success', __('The desired information has been successfully updated.'));
             return redirect()->route("dashboard.viewTourRequest", $id);
         } catch (\Exception $e) {
-            $request->session()->flash('danger', 'خطایی در پردازش اطلاعات ارسالی وجود دارد! لطفا با پشتیبانی مطرح نمایید.');
+            $request->session()->flash('danger', __('There is an error processing the sent information! Please raise with support.'));
             return redirect()->route("dashboard.viewTourRequest");
         }
     }
@@ -263,8 +263,8 @@ class TourRequestController extends Controller
         $id = $request->id;
         $tourRequest = new tourRequest();
         if (!(bool)$tourRequest->destroy($id)) {
-            return redirect()->back()->withErrors(['msg' => __('خطا! اطلاعات مورد نظر حذف نشد. لطفا با پشتسیبانی در میان بگذارید.')]);
+            return redirect()->back()->withErrors(['msg' => __('Error! The desired information was not deleted. Please share with support.')]);
         }
-        return redirect()->route('dashboard.tourRequest')->with(['success' => __('اطلاعات مورد نظر با موفقیت حذف گردید.')]);
+        return redirect()->route('dashboard.tourRequest')->with(['success' => __('The desired information was successfully deleted.')]);
     }
 }

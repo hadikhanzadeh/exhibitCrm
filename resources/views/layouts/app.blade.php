@@ -14,6 +14,11 @@
     <link rel="stylesheet" href="{{ asset('assets/fonts/icons/css/icons.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/select2/dist/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/mdBootstrap/dist/mds.bs.datetimepicker.style.css') }}">
+    @if(app()->getLocale() === 'fa')
+        <link rel="stylesheet" href="{{ asset('assets/sass/fonts.css') }}">
+    @else
+        <link rel="stylesheet" href="{{ asset('assets/sass/en-fonts.css') }}">
+    @endif
     <link rel="stylesheet" href="{{ asset('assets/sass/app.css') }}">
 </head>
 <body dir="{{ app()->getLocale() !== 'fa' ? 'ltr' : 'rtl' }}">
@@ -74,7 +79,12 @@
     </main>
 </div>
 </div>
-
+<script type="text/javascript">
+    const translate = {
+        "Nothing found!": "موردی یافت نشد!",
+        "Are you sure to delete the desired item?": "آیا از حذف آیتم مورد نظر مطمئن هستید؟"
+    };
+</script>
 <script type="text/javascript" src="{{ asset('assets/js/jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/plugins/mdBootstrap/dist/mds.bs.datetimepicker.js') }}"></script>

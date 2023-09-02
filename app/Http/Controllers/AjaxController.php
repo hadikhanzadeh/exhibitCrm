@@ -16,7 +16,7 @@ class AjaxController extends Controller
         ]);
 
         if (!$validator->passes()) {
-            return json_encode(['status' => 'error', 'message' => 'اطلاعات ارسالی صحیح نمی باشد! لطفا یک بار صفحه را رفرش کرده و مجدد امتحان کنید.']);
+            return json_encode(['status' => 'error', 'message' => __('The information sent is not correct! Please refresh the page and try again.')]);
         }
 
         $crmAPI = new crmAPI();
@@ -38,7 +38,7 @@ class AjaxController extends Controller
         ]);
 
         if (!$validator->passes()) {
-            return json_encode(['status' => 'error', 'message' => 'اطلاعات ارسالی صحیح نمی باشد! لطفا یک بار صفحه را رفرش کرده و مجدد امتحان کنید.']);
+            return json_encode(['status' => 'error', 'message' => __('The information sent is not correct! Please refresh the page and try again.')]);
         }
 
         $crmAPI = new crmAPI();
@@ -61,7 +61,7 @@ class AjaxController extends Controller
         ]);
 
         if (!$validator->passes()) {
-            return json_encode(['status' => 'error', 'message' => 'اطلاعات ارسالی صحیح نمی باشد! لطفا یک بار صفحه را رفرش کرده و مجدد امتحان کنید.']);
+            return json_encode(['status' => 'error', 'message' => __('The information sent is not correct! Please refresh the page and try again.')]);
         }
 
         $crmAPI = new crmAPI();
