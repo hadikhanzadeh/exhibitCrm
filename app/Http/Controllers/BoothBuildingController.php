@@ -278,10 +278,11 @@ class BoothBuildingController extends Controller
                 ]
             ];
             $getExhibitionTitle = $crmAPI->request($reqData);
+            $getExhibitionTitle = $getExhibitionTitle[0];
         } else {
             $getExhibitionTitle = $boothBuilding[0]->exhibition_title;
         }
-        return view('dashboard.pages.boothBuildingRequest.group-list', ['items' => $boothBuilding, 'title' => $getExhibitionTitle[0], 'taxData' => $taxData]);
+        return view('dashboard.pages.boothBuildingRequest.group-list', ['items' => $boothBuilding, 'title' => $getExhibitionTitle, 'taxData' => $taxData]);
     }
 
     /**

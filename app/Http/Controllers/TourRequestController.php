@@ -154,6 +154,7 @@ class TourRequestController extends Controller
                 ]
             ];
             $getExhibitionTitle = $crmAPI->request($reqData);
+            $getExhibitionTitle = $getExhibitionTitle[0];
         } else {
             $getExhibitionTitle = $tourRequests[0]->exhibition_title;
         }
