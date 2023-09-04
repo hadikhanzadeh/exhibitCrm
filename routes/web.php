@@ -29,12 +29,16 @@ Route::prefix(parseLocale())->group(function () {
     ], function () {
         Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
         Route::get('/token-form', [App\Http\Controllers\HomeController::class, 'createToken'])->name('createToken');
+
+        /* ---------- Tour Request Routes ---------- */
         Route::get('/tour-request', [App\Http\Controllers\TourRequestController::class, 'index'])->name('tourRequest');
         Route::get('/tour-request/group/{exhibit_id}', [App\Http\Controllers\TourRequestController::class, 'groupIndex'])->name('groupIndex');
         Route::get('/tour-request/view/{id}', [App\Http\Controllers\TourRequestController::class, 'show'])->name('viewTourRequest');
         Route::get('/tour-request/delete/{id}', [App\Http\Controllers\TourRequestController::class, 'destroy'])->name('destroyTourRequest');
+        /* ---------- Booth Building Routes ---------- */
+        Route::get('/booth-building', [App\Http\Controllers\BoothBuildingController::class, 'index'])->name('boothBuilding');
 
-        /* ----------------------- Post Requests -------------------- */
+        /* ------------------------------------- Post Requests ------------------------------------- */
         Route::post('/generate-token', [App\Http\Controllers\HomeController::class, 'generateToken'])->name('generateToken');
         Route::post('/getCountries', [App\Http\Controllers\AjaxController::class, 'getCountries'])->name('getCountries');
         Route::post('/getCites', [App\Http\Controllers\AjaxController::class, 'getCites'])->name('getCites');

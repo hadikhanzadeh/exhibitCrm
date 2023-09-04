@@ -43,11 +43,13 @@ return new class extends Migration {
             $table->string('height_booth')->nullable(); // ارتفاع غرفه
             $table->string('flower_arrangement')->nullable(); // نیاز به گل آرایی
             $table->string('design_type')->nullable(); // نوع طراحی
-            $table->string('other_city_booth_services')->nullable(); // خمات غرفه سازی در شهر دیگر
-            $table->string('other_country_booth_services')->nullable(); // خمات غرفه سازی خارج ایران
+            $table->string('another_city')->nullable(); // خمات غرفه سازی در شهر دیگر
+            $table->string('another_country')->nullable(); // خمات غرفه سازی خارج ایران
+            $table->string('need_reserve')->default('false');
             $table->string('tracking_code'); //کد رهگیری
-            $table->string('need_reserve_booth_location')->default('false');
             $table->bigInteger('operator_id')->nullable();
+            $table->string('status', 15)->default('pending');
+            $table->string('lang', 5)->default('fa');
             $table->timestamps();
         });
     }

@@ -2,17 +2,15 @@
 
 @section('content')
     @include('dashboard.parts.messages')
-
     <div class="row">
         <div class="col-12">
-            <header class="title">
-                <h1> {{ __('Tour requests for ') . $items[0]->exhibition_title }}</h1>
-                <a class="btn btn-outline-primary" href="{{ route('dashboard.tourRequest') }}">{{ __('back') }}</a>
-            </header>
+            <div class="title">
+                <h1>{{ __('Tour Requests') }}</h1>
+            </div>
         </div>
     </div>
 
-    @include('dashboard.parts.filter',['excludeFields' => ['exhibition_title']])
+    @include('dashboard.parts.filter',['excludeFields' => []])
 
     <div class="row">
         <div class="col-12">
@@ -30,14 +28,11 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>{{ __('Date') }}</th>
+                            <th>{{__('The title of the exhibition')}}</th>
                             <th>{{ __('Country') }}</th>
                             <th>{{ __('City') }}</th>
-                            <th>{{ __('Company Name') }}</th>
-                            <th>{{ __('Name of Responsible') }}</th>
-                            <th>{{ __('Participants') }}</th>
-                            <th>{{ __('Phone number') }}</th>
-                            <th>{{ __('Status') }}</th>
+                            <th> {{ __('Total requests') }}</th>
+                            <th>{{ __('Total participants') }}</th>
                             <th>{{ __('Operation') }}</th>
                         </tr>
                         </thead>
@@ -49,20 +44,14 @@
                             @foreach($items as  $item)
                                 <tr>
                                     <td>{{ $i }}</td>
-                                    <td dir="ltr">{!! verta($item->created_at) !!}</td>
+                                    <td>{!! $item->exhibition_title !!}</td>
                                     <td>{!! $item->country_title !!}</td>
                                     <td>{!! $item->city_title !!}</td>
-                                    <td>{!! $item->company_name !!}</td>
-                                    <td>{!! $item->responsible !!}</td>
-                                    <td>{{ $item->participants }}</td>
-                                    <td>{{ $item->mobile }}</td>
-                                    <td>{!!  \App\Http\Lib\wbsUtility::getStatus($item->status) !!}</td>
+                                    <td>{{ $item->totalCount }}</td>
+                                    <td>{{ $item->totalParticipants }}</td>
                                     <td class="action">
-                                        <a href="{{ route('dashboard.viewTourRequest',$item->id) }}"><i
+                                        <a href="{{ route('dashboard.groupIndex',$item->exhibition_id) }}"><i
                                                 class="icon-eye-2"></i></a>
-                                        <a class="delete-item"
-                                           href="{{ route('dashboard.destroyTourRequest',$item->id)  }}"><i
-                                                class="icon-cancel-2"></i></a>
                                     </td>
                                 </tr>
                                 @php
@@ -72,17 +61,17 @@
                         @else
                             <tr>
                                 <td colspan="10" class="text-center">
-                                    {{ __('Nothing found!') }}
+                                    موردی یافت نشد!
                                 </td>
                             </tr>
                         @endif
                         </tbody>
                     </table>
-                    @if ($items->links()->paginator->hasPages())
+                    {{--@if ($items->links()->paginator->hasPages())
                         <div class="wbs-paginate">
                             {{ $items->links() }}
                         </div>
-                    @endif
+                    @endif--}}
                 </div>
             </div>
         </div>

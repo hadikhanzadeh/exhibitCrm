@@ -1,15 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    @if (\Session::has('success'))
-        <div class="row">
-            <div class="col-12">
-                <div class="alert alert-success">
-                    {!! \Session::get('success') !!}
-                </div>
-            </div>
-        </div>
-    @endif
+    @include('dashboard.parts.messages')
 
     <div class="row">
         <div class="col-12">
