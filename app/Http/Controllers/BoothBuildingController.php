@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Lib\crmAPI;
 use App\Http\Lib\wbsUtility;
 use App\Models\boothBuilding;
+use App\Models\tourRequest;
+use DB;
 use Illuminate\Http\Request;
 use Validator;
 
@@ -15,7 +17,7 @@ class BoothBuildingController extends Controller
      */
     public function index(Request $request)
     {
-        $boothBuildings = BoothBuildingController::where('lang', '=', app()->getLocale())->where(function ($query) use ($request) {
+        $boothBuildings = boothBuilding::where('lang', '=', app()->getLocale())->where(function ($query) use ($request) {
             $title = $request->has('title') ? $request->get('title') : null;
             $country = $request->has('country') ? $request->get('country') : null;
             $city = $request->has('city') ? $request->get('city') : null;
@@ -50,9 +52,9 @@ class BoothBuildingController extends Controller
             }
 
         })
-            ->orderBy('totalParticipants', 'desc')
+            ->orderBy('totalSize', 'desc')
             ->orderBy('created_at', 'desc')
-            ->select('exhibition_id', 'country_title', 'city_title', 'exhibition_title', DB::raw('COUNT(id) as totalCount'), DB::raw('SUM(participants) as totalParticipants'))->take(5)->groupBy('exhibition_id')->get();
+            ->select('exhibition_id', 'country_title', 'city_title', 'exhibition_title', DB::raw('COUNT(id) as totalCount'), DB::raw('SUM(meterage_booth) as totalSize'))->take(5)->groupBy('exhibition_id')->get();
         $params = [];
         if ($request->has('country')) {
             $params['country'] = $request->get('country');
@@ -74,7 +76,7 @@ class BoothBuildingController extends Controller
             ];
             $taxData = $crmAPI->request($reqData);
         }
-        return view('dashboard.pages.tourRequest.list', ['items' => $boothBuildings, 'taxData' => $taxData]);
+        return view('dashboard.pages.boothBuildingRequest.list', ['items' => $boothBuildings, 'taxData' => $taxData]);
     }
 
     /**
@@ -177,9 +179,13 @@ class BoothBuildingController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(booth_building $booth_building)
+    public function show(Request $request)
     {
-        //
+        $boothBuilding = boothBuilding::where('id', '=', $request->id)->first();
+        if (!$boothBuilding) {
+            return view('dashboard.error');
+        }
+        return view('dashboard.pages.tourRequest.view', ['item' => $boothBuilding]);
     }
 
     /**
@@ -198,11 +204,98 @@ class BoothBuildingController extends Controller
         //
     }
 
+    public function groupIndex(Request $request)
+    {
+        $boothBuilding = boothBuilding::where(function ($query) use ($request) {
+            $query->where('lang', '=', app()->getLocale());
+            $query->where('exhibition_id', '=', $request->exhibit_id);
+
+            $title = $request->has('title') ? $request->get('title') : null;
+            $country = $request->has('country') ? $request->get('country') : null;
+            $city = $request->has('city') ? $request->get('city') : null;
+            $genre = $request->has('genre') ? $request->get('genre') : null;
+            $fromDate = $request->has('from_date_en') ? $request->get('from_date_en') : null;
+            $toDate = $request->has('to_date_en') ? $request->get('to_date_en') : null;
+            $status = $request->has('status') ? $request->get('status') : null;
+
+            if (isset($title)) {
+                $query->where('exhibition_title', 'LIKE', '%' . $title . '%');
+            }
+            if (!empty($country)) {
+                $query->where('country', '=', $country);
+            }
+            if (!empty($city)) {
+                $query->whereIn('city', $city);
+            }
+            if (!empty($genre)) {
+                $query->whereIn('activity_area', $genre);
+            }
+
+            if (!empty($fromDate)) {
+                if (!empty($toDate)) {
+                    $query->whereBetween('created_at', [$fromDate, $toDate]);
+                } else {
+                    $query->whereDate('created_at', '=', $fromDate);
+                }
+            }
+
+            if (!empty($status)) {
+                $query->where('status', 'like', $status);
+            }
+
+        })->orderBy('meterage_booth', 'desc')->orderBy('created_at', 'desc')->paginate(2)->appends($request->all());
+
+        $params = [];
+        if ($request->has('country')) {
+            $params['country'] = $request->get('country');
+        }
+        if ($request->has('city')) {
+            $params['city'] = $request->get('city');
+        }
+        if ($request->has('genre')) {
+            $params['genre'] = $request->get('genre');
+        }
+        $taxData = [];
+        if (!empty($params)) {
+            $crmAPI = new crmAPI();
+            $reqData = [
+                'data' => [
+                    'action' => 'getTaxData',
+                    'params' => $params
+                ]
+            ];
+            $taxData = $crmAPI->request($reqData);
+        }
+
+        if ($boothBuilding->isEmpty()) {
+            $crmAPI = new crmAPI();
+            $reqData = [
+                'data' => [
+                    'action' => 'getExhibitionTitle',
+                    'params' => [
+                        'id' => $request->exhibit_id,
+                    ]
+                ]
+            ];
+            $getExhibitionTitle = $crmAPI->request($reqData);
+        } else {
+            $getExhibitionTitle = $boothBuilding[0]->exhibition_title;
+        }
+        return view('dashboard.pages.boothBuildingRequest.group-list', ['items' => $boothBuilding, 'title' => $getExhibitionTitle[0], 'taxData' => $taxData]);
+    }
+
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(booth_building $booth_building)
+    public function destroy(Request $request)
     {
-        //
+        $id = $request->id;
+        $item = boothBuilding::where('id', '=', $request->id)->first();
+        $boothBuilding = new boothBuilding();
+        if (!$item || !(bool)$boothBuilding->destroy($id)) {
+            return redirect()->back()->withErrors(['msg' => __('Error! The desired information was not deleted. Please share with support.')]);
+        }
+        return redirect()->route('dashboard.boothGroupIndex', ['exhibit_id' => $item->exhibition_id])->with(['success' => __('The desired information was successfully deleted.')]);
+
     }
 }

@@ -142,7 +142,23 @@ class TourRequestController extends Controller
             ];
             $taxData = $crmAPI->request($reqData);
         }
-        return view('dashboard.pages.tourRequest.group-list', ['items' => $tourRequests, 'taxData' => $taxData]);
+
+        if ($tourRequests->isEmpty()) {
+            $crmAPI = new crmAPI();
+            $reqData = [
+                'data' => [
+                    'action' => 'getExhibitionTitle',
+                    'params' => [
+                        'id' => $request->exhibit_id,
+                    ]
+                ]
+            ];
+            $getExhibitionTitle = $crmAPI->request($reqData);
+        } else {
+            $getExhibitionTitle = $tourRequests[0]->exhibition_title;
+        }
+
+        return view('dashboard.pages.tourRequest.group-list', ['items' => $tourRequests, 'title' => $getExhibitionTitle, 'taxData' => $taxData]);
     }
 
     /**
@@ -261,10 +277,11 @@ class TourRequestController extends Controller
     public function destroy(Request $request)
     {
         $id = $request->id;
+        $item = tourRequest::where('id', '=', $request->id)->first();
         $tourRequest = new tourRequest();
-        if (!(bool)$tourRequest->destroy($id)) {
+        if (!$item || !(bool)$tourRequest->destroy($id)) {
             return redirect()->back()->withErrors(['msg' => __('Error! The desired information was not deleted. Please share with support.')]);
         }
-        return redirect()->route('dashboard.tourRequest')->with(['success' => __('The desired information was successfully deleted.')]);
+        return redirect()->route('dashboard.groupIndex', ['exhibit_id' => $item->exhibition_id])->with(['success' => __('The desired information was successfully deleted.')]);
     }
 }

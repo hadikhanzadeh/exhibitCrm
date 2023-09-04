@@ -37,6 +37,9 @@ Route::prefix(parseLocale())->group(function () {
         Route::get('/tour-request/delete/{id}', [App\Http\Controllers\TourRequestController::class, 'destroy'])->name('destroyTourRequest');
         /* ---------- Booth Building Routes ---------- */
         Route::get('/booth-building', [App\Http\Controllers\BoothBuildingController::class, 'index'])->name('boothBuilding');
+        Route::get('/booth-building/group/{exhibit_id}', [App\Http\Controllers\BoothBuildingController::class, 'groupIndex'])->name('boothGroupIndex');
+        Route::get('/booth-building/view/{id}', [App\Http\Controllers\BoothBuildingController::class, 'show'])->name('viewBoothBuilding');
+        Route::get('/booth-building/delete/{id}', [App\Http\Controllers\BoothBuildingController::class, 'destroy'])->name('destroyBoothBuilding');
 
         /* ------------------------------------- Post Requests ------------------------------------- */
         Route::post('/generate-token', [App\Http\Controllers\HomeController::class, 'generateToken'])->name('generateToken');

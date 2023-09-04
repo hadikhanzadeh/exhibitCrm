@@ -19,7 +19,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{{ route('dashboard.boothBuilding') }}">
                         <i class="icon-first-order"></i>
                         {{ __('Booth Making Requests') }}
                     </a>

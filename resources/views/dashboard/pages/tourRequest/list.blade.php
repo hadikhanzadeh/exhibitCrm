@@ -62,17 +62,12 @@
                         @else
                             <tr>
                                 <td colspan="10" class="text-center">
-                                    موردی یافت نشد!
+                                    {{ __('Nothing found!') }}
                                 </td>
                             </tr>
                         @endif
                         </tbody>
                     </table>
-                    {{--@if ($items->links()->paginator->hasPages())
-                        <div class="wbs-paginate">
-                            {{ $items->links() }}
-                        </div>
-                    @endif--}}
                 </div>
             </div>
         </div>

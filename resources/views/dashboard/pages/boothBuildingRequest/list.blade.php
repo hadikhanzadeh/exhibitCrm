@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-12">
             <div class="title">
-                <h1>{{ __('Tour Requests') }}</h1>
+                <h1>{{ __('Booth Building Requests') }}</h1>
             </div>
         </div>
     </div>
@@ -32,7 +32,7 @@
                             <th>{{ __('Country') }}</th>
                             <th>{{ __('City') }}</th>
                             <th> {{ __('Total requests') }}</th>
-                            <th>{{ __('Total participants') }}</th>
+                            <th>{{ __('Total Meterage') }}</th>
                             <th>{{ __('Operation') }}</th>
                         </tr>
                         </thead>
@@ -48,9 +48,9 @@
                                     <td>{!! $item->country_title !!}</td>
                                     <td>{!! $item->city_title !!}</td>
                                     <td>{{ $item->totalCount }}</td>
-                                    <td>{{ $item->totalParticipants }}</td>
+                                    <td>{{ $item->totalSize . ' ' . __('meter') }}</td>
                                     <td class="action">
-                                        <a href="{{ route('dashboard.groupIndex',$item->exhibition_id) }}"><i
+                                        <a href="{{ route('dashboard.boothGroupIndex',$item->exhibition_id) }}"><i
                                                 class="icon-eye-2"></i></a>
                                     </td>
                                 </tr>
@@ -61,17 +61,12 @@
                         @else
                             <tr>
                                 <td colspan="10" class="text-center">
-                                    موردی یافت نشد!
+                                    {{ __('Nothing found!') }}
                                 </td>
                             </tr>
                         @endif
                         </tbody>
                     </table>
-                    {{--@if ($items->links()->paginator->hasPages())
-                        <div class="wbs-paginate">
-                            {{ $items->links() }}
-                        </div>
-                    @endif--}}
                 </div>
             </div>
         </div>

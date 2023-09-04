@@ -27,7 +27,7 @@ return new class extends Migration {
             $table->string('email'); //  ایمیل
             $table->string('manager_name')->nullable(); // نام و نام خانوادگی مدیر عامل
             $table->string('responsible')->nullable(); // نام و نام خانوادگی مسئول پیگیری
-            $table->string('meterage_booth'); // متراژ غرفه
+            $table->tinyInteger('meterage_booth'); // متراژ غرفه
             $table->string('dimensions_booth'); //ابعاد غرفه
             $table->string('hall_name'); // نام سالن
             $table->text('hall_map')->nullable(); // نقشه سالن
@@ -39,7 +39,7 @@ return new class extends Migration {
             $table->string('product_type')->nullable(); // نوع محصول
             $table->string('product_dimensions')->nullable(); // ابعاد محصولات
             $table->smallInteger('answering_desks')->nullable(); // تعداد میز پاسخگویی
-            $table->integer('amount_budget')->nullable(); // میزان بوجه
+            $table->bigInteger('amount_budget')->nullable(); // میزان بوجه
             $table->string('height_booth')->nullable(); // ارتفاع غرفه
             $table->string('flower_arrangement')->nullable(); // نیاز به گل آرایی
             $table->string('design_type')->nullable(); // نوع طراحی

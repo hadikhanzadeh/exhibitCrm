@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-12">
             <header class="title">
-                <h1> {{ __('Tour requests for ') . $items[0]->exhibition_title }}</h1>
+                <h1> {{ __('Tour requests for ') . $title }}</h1>
                 <a class="btn btn-outline-primary" href="{{ route('dashboard.tourRequest') }}">{{ __('back') }}</a>
             </header>
         </div>

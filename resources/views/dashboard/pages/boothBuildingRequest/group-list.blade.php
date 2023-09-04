@@ -6,8 +6,8 @@
     <div class="row">
         <div class="col-12">
             <header class="title">
-                <h1> {{ __('Tour requests for ') . $items[0]->exhibition_title }}</h1>
-                <a class="btn btn-outline-primary" href="{{ route('dashboard.tourRequest') }}">{{ __('back') }}</a>
+                <h1> {{ __('Booth Building requests for ') . $title }}</h1>
+                <a class="btn btn-outline-primary" href="{{ route('dashboard.boothBuilding') }}">{{ __('back') }}</a>
             </header>
         </div>
     </div>
@@ -35,7 +35,8 @@
                             <th>{{ __('City') }}</th>
                             <th>{{ __('Company Name') }}</th>
                             <th>{{ __('Name of Responsible') }}</th>
-                            <th>{{ __('Participants') }}</th>
+                            <th>{{ __('Meterage') }}</th>
+                            <th>{{ __('Budget') }}</th>
                             <th>{{ __('Phone number') }}</th>
                             <th>{{ __('Status') }}</th>
                             <th>{{ __('Operation') }}</th>
@@ -54,14 +55,15 @@
                                     <td>{!! $item->city_title !!}</td>
                                     <td>{!! $item->company_name !!}</td>
                                     <td>{!! $item->responsible !!}</td>
-                                    <td>{{ $item->participants }}</td>
-                                    <td>{{ $item->mobile }}</td>
+                                    <td>{{ $item->meterage_booth }}</td>
+                                    <td>{!! number_format($item->amount_budget) . ' ' . '<small>'. __('Rial') .'</small>' !!}</td>
+                                    <td>{{ $item->mobile_phone }}</td>
                                     <td>{!!  \App\Http\Lib\wbsUtility::getStatus($item->status) !!}</td>
                                     <td class="action">
-                                        <a href="{{ route('dashboard.viewTourRequest',$item->id) }}"><i
+                                        <a href="{{ route('dashboard.viewBoothBuilding',$item->id) }}"><i
                                                 class="icon-eye-2"></i></a>
                                         <a class="delete-item"
-                                           href="{{ route('dashboard.destroyTourRequest',$item->id)  }}"><i
+                                           href="{{ route('dashboard.destroyBoothBuilding',$item->id)  }}"><i
                                                 class="icon-cancel-2"></i></a>
                                     </td>
                                 </tr>
