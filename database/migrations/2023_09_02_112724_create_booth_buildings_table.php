@@ -45,7 +45,7 @@ return new class extends Migration {
             $table->string('design_type')->nullable(); // نوع طراحی
             $table->string('another_city')->nullable(); // خمات غرفه سازی در شهر دیگر
             $table->string('another_country')->nullable(); // خمات غرفه سازی خارج ایران
-            $table->string('need_reserve')->default('false');
+            $table->string('need_reserve')->default('0');
             $table->string('tracking_code'); //کد رهگیری
             $table->bigInteger('operator_id')->nullable();
             $table->string('status', 15)->default('pending');
