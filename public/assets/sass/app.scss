@@ -6,6 +6,8 @@ body {
     @import 'sidebar';
 
     .page-content {
+        padding-bottom: 100px;
+
         &.is-rtl {
             margin-right: 250px;
         }

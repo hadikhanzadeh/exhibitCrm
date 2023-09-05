@@ -47,6 +47,19 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="row mb-3">
+                                <label for="lang"
+                                       class="col-md-4 col-form-label text-md-end">{{ __('Select Language') }}</label>
+
+                                <div class="col-md-6">
+                                    <select class="form-select" id="wbsSelectLang" name="lang">
+                                        @foreach(config('app.available_locales') as $key => $locale)
+                                            <option
+                                                value="{{ $locale }}" {{ Request::segment(1) === $locale  ? 'selected' : '' }}>{{ $key }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
 
                             <div class="row mb-3">
                                 <label class="col-md-4 col-form-label text-end"> </label>

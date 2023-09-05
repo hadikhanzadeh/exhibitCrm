@@ -50,21 +50,27 @@ jQuery(function ($) {
     });
 
     if ($('#from_date').length > 0) {
-        new mds.MdsPersianDateTimePicker(document.getElementById('from_date'), {
+        const fromDate = {
             groupId: 'filterDate',
             selectedDate: $('#from_date_en').val().length > 0 ? new Date($('#from_date_en').val()) : undefined,
             targetTextSelector: '#from_date',
             targetDateSelector: '#from_date_en',
             fromDate: true
-        });
-
-        new mds.MdsPersianDateTimePicker(document.getElementById('to_date'), {
+        }, toDate = {
             groupId: 'filterDate',
             selectedDate: $('#to_date_en').val().length > 0 ? new Date($('#to_date_en').val()) : undefined,
             targetTextSelector: '#to_date',
             targetDateSelector: '#to_date_en',
             toDate: true
-        });
+        };
+
+        if (lang !== 'fa') {
+            fromDate.isGregorian = true;
+            toDate.isGregorian = true;
+        }
+        new mds.MdsPersianDateTimePicker(document.getElementById('from_date'), fromDate);
+
+        new mds.MdsPersianDateTimePicker(document.getElementById('to_date'), toDate);
     }
 
     body.on('click', '.delete-item', function () {

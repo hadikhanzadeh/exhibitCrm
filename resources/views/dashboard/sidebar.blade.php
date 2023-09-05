@@ -13,13 +13,13 @@
                     </a>
                 </li>
                 <li>
-                    <a {!! request()->routeIs('dashboard.tourRequest') ? 'class="active"' : '' !!} href="{{ route('dashboard.tourRequest') }}">
+                    <a {!! (app()->getLocale() === 'fa' && request()->segment(2) === 'tour-request') || (app()->getLocale() !== 'fa' && request()->segment(3) === 'tour-request')  ? 'class="active"' : '' !!} href="{{ route('dashboard.tourRequest') }}">
                         <i class="icon-first-order"></i>
                         {{ __('Tour Requests') }}
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('dashboard.boothBuilding') }}">
+                    <a {!! (app()->getLocale() === 'fa' && request()->segment(2) === 'booth-building') || (app()->getLocale() !== 'fa' && request()->segment(3) === 'booth-building')  ? 'class="active"' : '' !!}  href="{{ route('dashboard.boothBuilding') }}">
                         <i class="icon-first-order"></i>
                         {{ __('Booth Making Requests') }}
                     </a>

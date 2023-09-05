@@ -68,6 +68,7 @@
                                     @endforeach
                                 </select>
                             </form>
+
                         </div>
                     </div>
                 </nav>
@@ -83,7 +84,7 @@
     const translate = {
         "Nothing found!": "موردی یافت نشد!",
         "Are you sure to delete the desired item?": "آیا از حذف آیتم مورد نظر مطمئن هستید؟"
-    };
+    }, lang = '{{ app()->getLocale() }}';
 </script>
 <script type="text/javascript" src="{{ asset('assets/js/jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
