@@ -35,18 +35,19 @@ Route::prefix(parseLocale())->group(function () {
         Route::get('/tour-request/group/{exhibit_id}', [App\Http\Controllers\TourRequestController::class, 'groupIndex'])->name('groupIndex');
         Route::get('/tour-request/view/{id}', [App\Http\Controllers\TourRequestController::class, 'show'])->name('viewTourRequest');
         Route::get('/tour-request/delete/{id}', [App\Http\Controllers\TourRequestController::class, 'destroy'])->name('destroyTourRequest');
+        Route::post('/view-tour-request/{id}', [App\Http\Controllers\TourRequestController::class, 'update'])->name('updateTourRequest');
         /* ---------- Booth Building Routes ---------- */
         Route::get('/booth-building', [App\Http\Controllers\BoothBuildingController::class, 'index'])->name('boothBuilding');
         Route::get('/booth-building/group/{exhibit_id}', [App\Http\Controllers\BoothBuildingController::class, 'groupIndex'])->name('boothGroupIndex');
         Route::get('/booth-building/view/{id}', [App\Http\Controllers\BoothBuildingController::class, 'show'])->name('viewBoothBuilding');
         Route::get('/booth-building/delete/{id}', [App\Http\Controllers\BoothBuildingController::class, 'destroy'])->name('destroyBoothBuilding');
+        Route::post('/booth-building/view/{id}', [App\Http\Controllers\BoothBuildingController::class, 'update'])->name('updateBoothBuilding');
 
         /* ------------------------------------- Post Requests ------------------------------------- */
         Route::post('/generate-token', [App\Http\Controllers\HomeController::class, 'generateToken'])->name('generateToken');
         Route::post('/getCountries', [App\Http\Controllers\AjaxController::class, 'getCountries'])->name('getCountries');
         Route::post('/getCites', [App\Http\Controllers\AjaxController::class, 'getCites'])->name('getCites');
         Route::post('/getGenre', [App\Http\Controllers\AjaxController::class, 'getGenre'])->name('getGenre');
-        Route::post('/view-tour-request/{id}', [App\Http\Controllers\TourRequestController::class, 'update'])->name('updateTourRequest');
     });
     Route::get('/home', function () {
         if (\Session::get('locale') !== 'fa') {

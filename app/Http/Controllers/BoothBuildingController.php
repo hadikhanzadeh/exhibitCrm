@@ -185,7 +185,7 @@ class BoothBuildingController extends Controller
         if (!$boothBuilding) {
             return view('dashboard.error');
         }
-        return view('dashboard.pages.tourRequest.view', ['item' => $boothBuilding]);
+        return view('dashboard.pages.boothBuildingRequest.view', ['item' => $boothBuilding]);
     }
 
     /**
@@ -199,9 +199,82 @@ class BoothBuildingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, booth_building $booth_building)
+    public function update(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'company_name' => 'required|string',
+            'manager' => 'required|string',
+            'mobile' => 'required|string',
+            'size' => 'required|integer',
+            'dimensions' => 'required|string',
+            'hall-name' => 'required|string',
+            'corporate-color' => 'required|string',
+            'showcase-product' => 'required|string',
+            'equipment' => 'required|string',
+            'product-count' => 'required|int',
+            'product-type' => 'required|string',
+            'product-dimensions' => 'required|string',
+            'answering-desks' => 'required|int',
+            'budget' => 'required|string',
+            'email' => 'email',
+            'website' => 'string',
+            'design-type' => 'required|string',
+            'height' => 'required|string',
+            'flower-arrangement' => 'required|string',
+            'another-city' => 'required|int',
+            'another-country' => 'required|int',
+            'need-reserve' => 'required|int',
+            'status' => 'required|string',
+            'id' => 'required|integer',
+        ]);
+
+        if (!$validator->passes()) {
+            $request->session()->flash('error', __('There is an error processing the sent information! Please raise with support.'));
+            return redirect()->back();
+        }
+
+        $id = $request->get('id');
+        $boothBuilding = boothBuilding::find($id);
+        if (!$boothBuilding) {
+            $request->session()->flash('error', __('There is an error processing the sent information! Please raise with support.'));
+            return redirect()->back();
+        }
+
+        try {
+            $boothBuilding->company_name = $request->get('company_name');
+            $boothBuilding->manager_name = $request->get('manager');
+            $boothBuilding->mobile_phone = $request->get('mobile');
+            $boothBuilding->meterage_booth = $request->get('size');
+            $boothBuilding->dimensions_booth = $request->get('dimensions');
+            $boothBuilding->hall_name = $request->get('hall-name');
+            $boothBuilding->corporate_color = $request->get('corporate-color');
+            $boothBuilding->showcase_product = $request->get('showcase-product');
+            $boothBuilding->equipment = $request->get('equipment');
+            $boothBuilding->product_count = $request->get('product-count');
+            $boothBuilding->product_type = $request->get('product-type');
+            $boothBuilding->product_dimensions = $request->get('product-dimensions');
+            $boothBuilding->answering_desks = $request->get('answering-desks');
+            $boothBuilding->amount_budget = str_replace(',', '', $request->get('budget'));
+            $boothBuilding->email = $request->get('email');
+            $boothBuilding->website = $request->get('website');
+            $boothBuilding->design_type = $request->get('design-type');
+            $boothBuilding->height_booth = $request->get('height');
+            $boothBuilding->flower_arrangement = $request->get('flower-arrangement');
+            $boothBuilding->another_city = $request->get('another-city');
+            $boothBuilding->another_country = $request->get('another-country');
+            $boothBuilding->need_reserve = $request->get('need-reserve');
+            $boothBuilding->status = $request->get('status');
+            $boothBuilding->operator_id = \Auth::id();
+
+            $boothBuilding->save();
+            $request->session()->flash('success', __('The desired information has been successfully updated.'));
+            return redirect()->route("dashboard.viewBoothBuilding", $id);
+
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+            $request->session()->flash('danger', __('There is an error processing the sent information! Please raise with support.'));
+            return redirect()->route("dashboard.viewBoothBuilding");
+        }
     }
 
     public function groupIndex(Request $request)
