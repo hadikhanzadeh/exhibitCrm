@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Lib\crmAPI;
+use App\Http\Lib\wbsUtility;
 use App\Models\BoothReserve;
+use DB;
 use Illuminate\Http\Request;
+use Validator;
 
 class BoothReserveController extends Controller
 {
@@ -88,7 +91,57 @@ class BoothReserveController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'company' => 'required|string',
+            'user_id' => 'required|integer',
+            'exhibition' => 'required|integer',
+            'exhibition-title' => 'required|string',
+            'country' => 'required|array',
+            'city' => 'required|array',
+            'genre' => 'required|array',
+            'mobile_phone' => 'required|string',
+            'email' => 'email',
+            'responsible' => 'required|string',
+            'ceo-name' => 'required|string',
+            'meterage' => 'required|integer',
+            'dimensions' => 'required|string',
+            'need_building' => 'required|bool',
+            'lang' => 'required|string'
+        ]);
+
+        if (!$validator->passes()) {
+            return json_encode(['status' => 'error', 'message' => __('The information sent is not correct! Please check your information carefully.')]);
+        }
+
+        try {
+            $boothReserve = new BoothReserve();
+            $trackingCode = wbsUtility::randomInt(10);
+            $boothReserve->user_id = (int)$request->get('user_id');
+            $boothReserve->company_name = $request->get('company');
+            $boothReserve->exhibition_id = $request->get('exhibition');
+            $boothReserve->exhibition_title = $request->get('exhibition-title');
+            $boothReserve->country = $request->get('country')[0];
+            $boothReserve->country_title = $request->get('country')[1];
+            $boothReserve->city = $request->get('city')[0];
+            $boothReserve->city_title = $request->get('city')[1];
+            $boothReserve->activity_area = $request->get('genre')[0];
+            $boothReserve->activity_area_title = $request->get('genre')[1];
+            $boothReserve->mobile_phone = $request->get('mobile_phone');
+            $boothReserve->email = $request->get('email');
+            $boothReserve->manager_name = $request->get('ceo-name');
+            $boothReserve->responsible = $request->get('responsible');
+            $boothReserve->meterage_booth = $request->get('meterage');
+            $boothReserve->dimensions_booth = $request->get('dimensions');
+            $boothReserve->need_building = $request->get('need_building');
+            $boothReserve->tracking_code = $trackingCode;
+            $boothReserve->lang = $request->get('lang');
+
+            $boothReserve->save();
+            return json_encode(['status' => 'success', 'message' => __('Your request has been successfully registered. Your tracking code: ') . $trackingCode]);
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+            return json_encode(['status' => 'error', 'message' => __('There is an error processing the sent information! Please raise with support.')]);
+        }
     }
 
     /**
@@ -114,9 +167,47 @@ class BoothReserveController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, BoothReserve $boothReserve)
+    public function update(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'company_name' => 'required|string',
+            'mobile' => 'required|string',
+            'email' => 'email',
+            'manager_name' => 'required|string',
+            'size' => 'required|integer',
+            'dimensions' => 'required|string',
+            'status' => 'required|string',
+            'id' => 'required|integer',
+        ]);
 
+        if (!$validator->passes()) {
+            $request->session()->flash('error', __('There is an error processing the sent information! Please raise with support.'));
+            return redirect()->back();
+        }
+        $id = $request->get('id');
+        $boothReserve = BoothReserve::find($id);
+        if (!$boothReserve) {
+            $request->session()->flash('error', __('There is an error processing the sent information! Please raise with support.'));
+            return redirect()->back();
+        }
+
+        try {
+            $boothReserve->company_name = $request->get('company_name');
+            $boothReserve->mobile_phone = $request->get('mobile');
+            $boothReserve->meterage_booth = $request->get('size');
+            $boothReserve->dimensions_booth = $request->get('dimensions');
+            $boothReserve->email = $request->get('email');
+            $boothReserve->manager_name = $request->get('manager_name');
+            $boothReserve->status = $request->get('status');
+            $boothReserve->operator_id = \Auth::id();
+
+            $boothReserve->save();
+            $request->session()->flash('success', __('The desired information has been successfully updated.'));
+            return redirect()->route("dashboard.viewBoothReserve", $id);
+        } catch (\Exception $e) {
+            $request->session()->flash('danger', __('There is an error processing the sent information! Please raise with support.'));
+            return redirect()->route("dashboard.viewBoothReserve");
+        }
     }
 
     public function groupIndex(Request $request)

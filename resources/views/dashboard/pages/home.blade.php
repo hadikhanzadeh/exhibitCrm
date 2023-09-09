@@ -1,3 +1,3 @@
 <div class="col-12">
-    eteryeye
+    {{ __('Hi! Welcome To Exhibition Maker CRM Dashboard') }}
 </div>

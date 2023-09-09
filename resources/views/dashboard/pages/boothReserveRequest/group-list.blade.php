@@ -36,7 +36,6 @@
                             <th>{{ __('Company Name') }}</th>
                             <th>{{ __('Name of Responsible') }}</th>
                             <th>{{ __('Meterage') }}</th>
-                            <th>{{ __('Budget') }}</th>
                             <th>{{ __('Phone number') }}</th>
                             <th>{{ __('Status') }}</th>
                             <th>{{ __('Operation') }}</th>
@@ -56,7 +55,6 @@
                                     <td>{!! $item->company_name !!}</td>
                                     <td>{!! $item->responsible !!}</td>
                                     <td>{{ $item->meterage_booth }}</td>
-                                    <td>{!! number_format($item->amount_budget) . ' ' . '<small>'. __('Rial') .'</small>' !!}</td>
                                     <td>{{ $item->mobile_phone }}</td>
                                     <td>{!!  \App\Http\Lib\wbsUtility::getStatus($item->status) !!}</td>
                                     <td class="action">

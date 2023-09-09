@@ -16,4 +16,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:sanctum'])->post('/tourRequest', [\App\Http\Controllers\TourRequestController::class, 'store']);
 Route::middleware(['auth:sanctum'])->post('/boothBuilding', [\App\Http\Controllers\BoothBuildingController::class, 'store']);
+Route::middleware(['auth:sanctum'])->post('/boothReserveRequest', [\App\Http\Controllers\BoothReserveController::class, 'store']);
 

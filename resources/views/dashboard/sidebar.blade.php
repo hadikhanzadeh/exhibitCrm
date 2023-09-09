@@ -24,6 +24,12 @@
                         {{ __('Booth Making Requests') }}
                     </a>
                 </li>
+                <li>
+                    <a {!! (app()->getLocale() === 'fa' && request()->segment(2) === 'booth-reserve') || (app()->getLocale() !== 'fa' && request()->segment(3) === 'booth-reserve')  ? 'class="active"' : '' !!}  href="{{ route('dashboard.boothReserve') }}">
+                        <i class="icon-first-order"></i>
+                        {{ __('Booth Reserve Requests') }}
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

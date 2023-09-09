@@ -59,9 +59,9 @@ Route::prefix(parseLocale())->group(function () {
     });
     Route::get('/home', function () {
         if (\Session::get('locale') !== 'fa') {
-            return redirect('/' . \Session::get('locale') . '/dashboard');
+            return redirect(url('/') . \Session::get('locale') . '/dashboard');
         }
-        return redirect('/dashboard');
+        return redirect(route('dashboard.index'));
     });
 });
 
