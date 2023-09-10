@@ -34,6 +34,21 @@ jQuery(function ($) {
         $('#city').removeAttr('disabled');
     });
 
+    body.on('change', '#city', function () {
+        $('#cityTitle').val($('#city option:selected').text());
+        wbsSelect2Ajax('#exhibition', {country: $('#country').val(), city: $('#city').val()});
+        $('#exhibition').removeAttr('disabled');
+    });
+
+    body.on('change', '#exhibition', function () {
+        $('#exhibitionTitle').val($('#exhibition option:selected').text());
+        wbsAjax($('#genre').attr('data-url'), {exhibit_id: $(this).val()}, 'json', function (res) {
+            $('#genre').val(res.title);
+            $('#genreID').val(res.id);
+        });
+    });
+
+
     $("#searchInTable").on("keyup", function () {
         const _this = $(this);
         var value = $(this).val().toLowerCase();
@@ -106,6 +121,7 @@ jQuery(function ($) {
                     processResults: function (data) {
                         var options = [];
                         if (data) {
+                            console.log(data);
                             // data is the array of arrays, and each of them contains ID and the Label of the option
                             $.each(data, function (index, text) { // do not forget that "index" is just auto incremented value
                                 options.push({id: index, text: text});

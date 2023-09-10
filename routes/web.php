@@ -35,6 +35,8 @@ Route::prefix(parseLocale())->group(function () {
         Route::get('/tour-request/group/{exhibit_id}', [App\Http\Controllers\TourRequestController::class, 'groupIndex'])->name('groupIndex');
         Route::get('/tour-request/view/{id}', [App\Http\Controllers\TourRequestController::class, 'show'])->name('viewTourRequest');
         Route::get('/tour-request/delete/{id}', [App\Http\Controllers\TourRequestController::class, 'destroy'])->name('destroyTourRequest');
+        Route::get('/create-tour-request', [App\Http\Controllers\TourRequestController::class, 'create'])->name('createTourRequest');
+        Route::post('/save-tour-request', [App\Http\Controllers\TourRequestController::class, 'store'])->name('saveTourRequest');
         Route::post('/view-tour-request/{id}', [App\Http\Controllers\TourRequestController::class, 'update'])->name('updateTourRequest');
 
         /* ---------- Booth Building Routes ---------- */
@@ -56,6 +58,8 @@ Route::prefix(parseLocale())->group(function () {
         Route::post('/getCountries', [App\Http\Controllers\AjaxController::class, 'getCountries'])->name('getCountries');
         Route::post('/getCites', [App\Http\Controllers\AjaxController::class, 'getCites'])->name('getCites');
         Route::post('/getGenre', [App\Http\Controllers\AjaxController::class, 'getGenre'])->name('getGenre');
+        Route::post('/getExhibitions', [App\Http\Controllers\AjaxController::class, 'getExhibitions'])->name('getExhibitions');
+        Route::post('/getExhibitGenre', [App\Http\Controllers\AjaxController::class, 'getExhibitGenre'])->name('getExhibitGenre');
     });
     Route::get('/home', function () {
         if (\Session::get('locale') !== 'fa') {

@@ -163,6 +163,14 @@ class TourRequestController extends Controller
     }
 
     /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('dashboard.pages.tourRequest.new');
+    }
+
+    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -181,7 +189,7 @@ class TourRequestController extends Controller
             'ceo-name' => 'required|string',
             'participants' => 'required|integer'
         ]);
-
+        dd($validator->errors());
         if (!$validator->passes()) {
             return json_encode(['status' => 'error', 'message' => __('The information sent is not correct! Please check your information carefully.')]);
         }

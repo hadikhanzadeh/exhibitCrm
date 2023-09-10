@@ -7,6 +7,8 @@
         <div class="col-12">
             <div class="title">
                 <h1>{{ __('Tour Requests') }}</h1>
+                <a class="btn btn-primary"
+                   href="{{ route('dashboard.createTourRequest') }}">{{ __('Create Tour Request') }}</a>
             </div>
         </div>
     </div>
