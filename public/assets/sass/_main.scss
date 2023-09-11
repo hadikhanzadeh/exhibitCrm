@@ -36,5 +36,14 @@
                 margin: 0;
             }
         }
+
+        form {
+            label.required {
+                &:after {
+                    color: red;
+                    content: "*";
+                }
+            }
+        }
     }
 }

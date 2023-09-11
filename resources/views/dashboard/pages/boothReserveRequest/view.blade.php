@@ -125,7 +125,7 @@
 
                 <div class="row mt-5 justify-content-between">
                     <div class="col-2">
-                        <a href="{{ route('dashboard.destroyTourRequest', $item->id) }}"
+                        <a href="{{ route('dashboard.destroyBoothReserve', $item->id) }}"
                            class="btn btn-danger delete-item">{{ __('Delete') }}</a>
                     </div>
                     <div class="col-2 text-end">

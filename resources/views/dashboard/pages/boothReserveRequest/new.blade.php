@@ -4,9 +4,9 @@
     <div class="row">
         <div class="wbs-form-content main-content m-0 col-12">
             <header>
-                <h1>{{ __('Create tour request') }}</h1>
+                <h1>{{ __('Create Booth Reserve Request') }}</h1>
                 <a class="btn btn-outline-primary"
-                   href="{{ route('dashboard.tourRequest') }}">{{ __('back') }}</a>
+                   href="{{ route('dashboard.boothReserve') }}">{{ __('back') }}</a>
             </header>
             @if(Session::has('success'))
                 <div class="alert alert-success">
@@ -23,7 +23,7 @@
                     Session::remove('error');
                 @endphp
             @endif
-            <form method="post" action="{{ route('dashboard.saveTourRequest') }}">
+            <form method="post" action="{{ route('dashboard.saveBoothReserveRequest') }}">
                 @csrf
                 <div class="row mb-3">
                     <fieldset class="col-md-3">
@@ -52,9 +52,8 @@
                     </fieldset>
                     <fieldset class="col-md-3">
                         <label class="form-label required">{{ __('Activity Area') }}</label>
-                        <input type="hidden" id="genreID" name="genre[]" value="">
-                        <input required readonly id="genre" data-url="{{ route('dashboard.getExhibitGenre') }}"
-                               type="text"
+                        <input required type="hidden" id="genreID" name="genre[]" value="">
+                        <input readonly id="genre" data-url="{{ route('dashboard.getExhibitGenre') }}" type="text"
                                name="genre[]" class="form-control"/>
                     </fieldset>
                 </div>
@@ -65,13 +64,15 @@
                                value="" type="text">
                     </fieldset>
                     <fieldset class="col-md-3">
-                        <label for="ceo-name" class="form-label required">{{ __('CEO name') }}</label>
-                        <input required class="form-control" name="ceo-name" id="ceo-name" value=""
+                        <label required for="ceo-name" class="form-label required">{{ __('CEO name') }}</label>
+                        <input class="form-control" name="ceo-name" id="ceo-name"
+                               value=""
                                type="text">
                     </fieldset>
                     <fieldset class="col-md-3">
-                        <label for="phone" class="form-label required">{{ __('Phone number') }}</label>
-                        <input required dir="ltr" class="form-control" name="phone" id="phone" value=""
+                        <label for="mobile_phone" class="form-label required">{{ __('Phone number') }}</label>
+                        <input required dir="ltr" class="form-control" name="mobile_phone" id="mobile_phone"
+                               value=""
                                type="text">
                     </fieldset>
                     <fieldset class="col-md-3">
@@ -87,12 +88,33 @@
                                type="text">
                     </fieldset>
                     <fieldset class="col-md-3">
-                        <label for="participants" class="form-label required">{{ __('Participants') }}</label>
-                        <input required class="form-control" name="participants" id="participants"
-                               value="" type="number">
+                        <label class="form-label required" for="meterage">{{ __('Booth meterage') }}
+                            <small>({{ __('meters') }})</small></label></label>
+                        <input required type="number" name="meterage" class="form-control" id="meterage"
+                               value="">
+                    </fieldset>
+                    <fieldset class="col-md-3">
+                        <label class="form-label required"
+                               for="dimensions">{{ __('Booth dimensions') }}</label>
+                        <input required type="text" name="dimensions" class="form-control" id="dimensions"
+                               value="">
+                    </fieldset>
+                    <fieldset class="col-md-3">
+                        <label
+                            class="form-label">{{ __('Need to building a booth at the exhibition :') }}</label>
+                        <div class="radio-panel">
+                            <label>
+                                <input checked type="radio" name="need_building" value="1"
+                                       class="form-check-input">
+                                {{ __('Yes')}}
+                            </label>
+                            <label>
+                                <input type="radio" name="need_building" value="0" class="form-check-input">
+                                {{ __('No') }}
+                            </label>
+                        </div>
                     </fieldset>
                 </div>
-
                 <div class="row mt-5 justify-content-between">
                     <div class="col-12 text-end">
                         <button type="submit" class="btn btn-primary">{{ __('Create Request') }}</button>
@@ -101,4 +123,6 @@
             </form>
         </div>
     </div>
+    <br>
+    <br>
 @endsection

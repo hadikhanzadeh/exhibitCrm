@@ -6,6 +6,8 @@
         <div class="col-12">
             <div class="title">
                 <h1>{{ __('Booth Reserve Requests') }}</h1>
+                <a class="btn btn-primary"
+                   href="{{ route('dashboard.createBoothReserveRequest') }}">{{ __('Create Booth Reserve Request') }}</a>
             </div>
         </div>
     </div>

@@ -44,6 +44,8 @@ Route::prefix(parseLocale())->group(function () {
         Route::get('/booth-building/group/{exhibit_id}', [App\Http\Controllers\BoothBuildingController::class, 'groupIndex'])->name('boothGroupIndex');
         Route::get('/booth-building/view/{id}', [App\Http\Controllers\BoothBuildingController::class, 'show'])->name('viewBoothBuilding');
         Route::get('/booth-building/delete/{id}', [App\Http\Controllers\BoothBuildingController::class, 'destroy'])->name('destroyBoothBuilding');
+        Route::get('/create-booth-building-request', [App\Http\Controllers\BoothBuildingController::class, 'create'])->name('createBoothBuildingRequest');
+        Route::post('/save-booth-building-request', [App\Http\Controllers\BoothBuildingController::class, 'store'])->name('saveBoothBuildingRequest');
         Route::post('/booth-building/view/{id}', [App\Http\Controllers\BoothBuildingController::class, 'update'])->name('updateBoothBuilding');
 
         /* ---------- Booth Reserve Routes ---------- */
@@ -51,6 +53,8 @@ Route::prefix(parseLocale())->group(function () {
         Route::get('/booth-reserve/group/{exhibit_id}', [App\Http\Controllers\BoothReserveController::class, 'groupIndex'])->name('reserveGroupIndex');
         Route::get('/booth-reserve/view/{id}', [App\Http\Controllers\BoothReserveController::class, 'show'])->name('viewBoothReserve');
         Route::get('/booth-reserve/delete/{id}', [App\Http\Controllers\BoothReserveController::class, 'destroy'])->name('destroyBoothReserve');
+        Route::get('/create-booth-reserve-request', [App\Http\Controllers\BoothReserveController::class, 'create'])->name('createBoothReserveRequest');
+        Route::post('/save-booth-reserve-request', [App\Http\Controllers\BoothReserveController::class, 'store'])->name('saveBoothReserveRequest');
         Route::post('/booth-reserve/view/{id}', [App\Http\Controllers\BoothReserveController::class, 'update'])->name('updateBoothReserve');
 
         /* ------------------------------------- Post Requests ------------------------------------- */

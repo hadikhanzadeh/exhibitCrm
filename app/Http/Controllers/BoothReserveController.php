@@ -83,7 +83,7 @@ class BoothReserveController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.pages.boothReserveRequest.new');
     }
 
     /**
@@ -93,7 +93,7 @@ class BoothReserveController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'company' => 'required|string',
-            'user_id' => 'required|integer',
+            'user_id' => 'integer',
             'exhibition' => 'required|integer',
             'exhibition-title' => 'required|string',
             'country' => 'required|array',
@@ -106,11 +106,15 @@ class BoothReserveController extends Controller
             'meterage' => 'required|integer',
             'dimensions' => 'required|string',
             'need_building' => 'required|bool',
-            'lang' => 'required|string'
+            'lang' => 'string'
         ]);
 
         if (!$validator->passes()) {
-            return json_encode(['status' => 'error', 'message' => __('The information sent is not correct! Please check your information carefully.')]);
+            if (!$request->routeIs('dashboard.saveBoothReserveRequest')) {
+                return json_encode(['status' => 'error', 'message' => __('The information sent is not correct! Please check your information carefully.')]);
+            }
+            $request->session()->flash('error', __('There is an error processing the sent information! Please raise with support.'));
+            return redirect()->route("dashboard.createBoothReserveRequest");
         }
 
         try {
@@ -134,13 +138,22 @@ class BoothReserveController extends Controller
             $boothReserve->dimensions_booth = $request->get('dimensions');
             $boothReserve->need_building = $request->get('need_building');
             $boothReserve->tracking_code = $trackingCode;
-            $boothReserve->lang = $request->get('lang');
-
+            $boothReserve->lang = $request->get('lang') ?: app()->getLocale();
+            if ($request->routeIs('dashboard.saveBoothReserveRequest')) {
+                $boothReserve->operator_id = \Auth::id();
+            }
             $boothReserve->save();
-            return json_encode(['status' => 'success', 'message' => __('Your request has been successfully registered. Your tracking code: ') . $trackingCode]);
+            if (!$request->routeIs('dashboard.saveBoothReserveRequest')) {
+                return json_encode(['status' => 'success', 'message' => __('Your request has been successfully registered. Your tracking code: ') . $trackingCode]);
+            }
+            $request->session()->flash('success', __('Your request has been successfully registered. Your tracking code:') . $trackingCode);
+            return redirect()->route("dashboard.viewBoothReserve", $boothReserve->id);
         } catch (\Exception $e) {
-            dd($e->getMessage());
-            return json_encode(['status' => 'error', 'message' => __('There is an error processing the sent information! Please raise with support.')]);
+            if (!$request->routeIs('dashboard.saveBoothReserveRequest')) {
+                return json_encode(['status' => 'error', 'message' => __('There is an error processing the sent information! Please raise with support.')]);
+            }
+            $request->session()->flash('error', __('There is an error processing the sent information! Please raise with support.'));
+            return redirect()->route("dashboard.createBoothReserveRequest");
         }
     }
 
@@ -170,11 +183,11 @@ class BoothReserveController extends Controller
     public function update(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'company_name' => 'required|string',
-            'mobile' => 'required|string',
+            'company' => 'required|string',
+            'mobile_phone' => 'required|string',
             'email' => 'email',
-            'manager_name' => 'required|string',
-            'size' => 'required|integer',
+            'ceo-name' => 'required|string',
+            'meterage' => 'required|integer',
             'dimensions' => 'required|string',
             'status' => 'required|string',
             'id' => 'required|integer',
@@ -192,12 +205,12 @@ class BoothReserveController extends Controller
         }
 
         try {
-            $boothReserve->company_name = $request->get('company_name');
-            $boothReserve->mobile_phone = $request->get('mobile');
-            $boothReserve->meterage_booth = $request->get('size');
+            $boothReserve->company_name = $request->get('company');
+            $boothReserve->mobile_phone = $request->get('mobile_phone');
+            $boothReserve->meterage_booth = $request->get('meterage');
             $boothReserve->dimensions_booth = $request->get('dimensions');
             $boothReserve->email = $request->get('email');
-            $boothReserve->manager_name = $request->get('manager_name');
+            $boothReserve->manager_name = $request->get('ceo-name');
             $boothReserve->status = $request->get('status');
             $boothReserve->operator_id = \Auth::id();
 

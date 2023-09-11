@@ -177,6 +177,7 @@ class TourRequestController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'company' => 'required|string',
+            'user_id' => 'integer',
             'exhibition' => 'required|integer',
             'exhibition-title' => 'required|string',
             'country' => 'required|array',
@@ -190,7 +191,11 @@ class TourRequestController extends Controller
         ]);
 
         if (!$validator->passes()) {
-            return json_encode(['status' => 'error', 'message' => __('The information sent is not correct! Please check your information carefully.')]);
+            if (!$request->routeIs('dashboard.saveTourRequest')) {
+                return json_encode(['status' => 'error', 'message' => __('There is an error processing the sent information! Please raise with support.')]);
+            }
+            $request->session()->flash('error', __('There is an error processing the sent information! Please raise with support.'));
+            return redirect()->route("dashboard.createTourRequest");
         }
         try {
             $tourRequest = new tourRequest;
@@ -219,13 +224,14 @@ class TourRequestController extends Controller
             if ($request->routeIs('dashboard.saveTourRequest')) {
                 $request->session()->flash('success', __('Your request has been successfully registered. Your tracking code:') . $trackingCode);
                 return redirect()->route("dashboard.viewTourRequest", $tourRequest->id);
-
-            } else {
-                return json_encode(['status' => 'success', 'message' => __('Your request has been successfully registered. Your tracking code:') . $trackingCode]);
             }
+            return json_encode(['status' => 'success', 'message' => __('Your request has been successfully registered. Your tracking code:') . $trackingCode]);
         } catch (\Exception $e) {
-            dd($e->getMessage());
-            return json_encode(['status' => 'error', 'message' => __('There is an error processing the sent information! Please raise with support.')]);
+            if (!$request->routeIs('dashboard.saveTourRequest')) {
+                return json_encode(['status' => 'error', 'message' => __('There is an error processing the sent information! Please raise with support.')]);
+            }
+            $request->session()->flash('error', __('There is an error processing the sent information! Please raise with support.'));
+            return redirect()->route("dashboard.createTourRequest");
         }
     }
 
