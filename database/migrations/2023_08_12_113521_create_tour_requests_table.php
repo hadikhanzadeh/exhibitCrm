@@ -29,7 +29,9 @@ return new class extends Migration {
             $table->bigInteger('activity_area')->nullable();
             $table->string('activity_area_title', 255)->nullable();
             $table->bigInteger('operator_id')->nullable();
+            $table->bigInteger('creator_id')->nullable();
             $table->string('status', 15)->default('pending');
+            $table->string('lang', 5)->default('fa');
             $table->timestamps();
         });
     }

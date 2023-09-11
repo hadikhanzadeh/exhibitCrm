@@ -84,7 +84,7 @@ class BoothBuildingController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.pages.boothBuildingRequest.new');
     }
 
     /**
@@ -94,7 +94,7 @@ class BoothBuildingController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'company' => 'required|string',
-            'user_id' => 'required|integer',
+            'user_id' => 'integer',
             'exhibition' => 'required|integer',
             'exhibition-title' => 'required|string',
             'country' => 'required|array',
@@ -122,11 +122,15 @@ class BoothBuildingController extends Controller
             'another-city' => 'required|bool',
             'outside-iran' => 'required|bool',
             'need-reserve' => 'required|bool',
-            'lang' => 'required|string',
+            'lang' => 'string',
         ]);
 
         if (!$validator->passes()) {
-            return json_encode(['status' => 'error', 'message' => __('The information sent is not correct! Please check your information carefully.')]);
+            if (!$request->routeIs('dashboard.saveBoothBuildingRequest')) {
+                return json_encode(['status' => 'error', 'message' => __('The information sent is not correct! Please check your information carefully.')]);
+            }
+            $request->session()->flash('error', __('There is an error processing the sent information! Please raise with support.'));
+            return redirect()->route("dashboard.createBoothBuildingRequest");
         }
 
         try {
@@ -166,13 +170,23 @@ class BoothBuildingController extends Controller
             $boothBuilding->another_country = $request->get('outside-iran');
             $boothBuilding->need_reserve = $request->get('need-reserve');
             $boothBuilding->tracking_code = $trackingCode;
-            $boothBuilding->lang = $request->get('lang');
+            $boothBuilding->lang = $request->get('lang') ?: app()->getLocale();
+            if ($request->routeIs('dashboard.saveBoothBuildingRequest')) {
+                $boothBuilding->creator_id = \Auth::id();
+            }
 
             $boothBuilding->save();
-            return json_encode(['status' => 'success', 'message' => __('Your request has been successfully registered. Your tracking code: ') . $trackingCode]);
+            if (!$request->routeIs('dashboard.saveBoothBuildingRequest')) {
+                return json_encode(['status' => 'success', 'message' => __('Your request has been successfully registered. Your tracking code: ') . $trackingCode]);
+            }
+            $request->session()->flash('success', __('Your request has been successfully registered. Your tracking code:') . $trackingCode);
+            return redirect()->route("dashboard.viewBoothBuilding", $boothBuilding->id);
         } catch (\Exception $e) {
-            dd($e->getMessage());
-            return json_encode(['status' => 'error', 'message' => __('There is an error processing the sent information! Please raise with support.')]);
+            if (!$request->routeIs('dashboard.saveBoothBuildingRequest')) {
+                return json_encode(['status' => 'error', 'message' => __('The information sent is not correct! Please check your information carefully.')]);
+            }
+            $request->session()->flash('error', __('There is an error processing the sent information! Please raise with support.'));
+            return redirect()->route("dashboard.createBoothBuildingRequest");
         }
     }
 

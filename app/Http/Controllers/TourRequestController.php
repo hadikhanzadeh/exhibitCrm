@@ -218,7 +218,7 @@ class TourRequestController extends Controller
             $tourRequest->tracking_code = $trackingCode;
             $tourRequest->lang = $request->get('lang') ?: app()->getLocale();
             if ($request->routeIs('dashboard.saveTourRequest')) {
-                $tourRequest->operator_id = \Auth::id();
+                $tourRequest->creator_id = \Auth::id();
             }
             $tourRequest->save();
             if ($request->routeIs('dashboard.saveTourRequest')) {

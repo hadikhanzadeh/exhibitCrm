@@ -32,6 +32,7 @@ return new class extends Migration {
             $table->string('need_building')->default('0');
             $table->string('tracking_code'); //کد رهگیری
             $table->bigInteger('operator_id')->nullable();
+            $table->bigInteger('creator_id')->nullable();
             $table->string('status', 15)->default('pending');
             $table->string('lang', 5)->default('fa');
             $table->timestamps();

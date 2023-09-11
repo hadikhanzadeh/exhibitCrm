@@ -140,7 +140,7 @@ class BoothReserveController extends Controller
             $boothReserve->tracking_code = $trackingCode;
             $boothReserve->lang = $request->get('lang') ?: app()->getLocale();
             if ($request->routeIs('dashboard.saveBoothReserveRequest')) {
-                $boothReserve->operator_id = \Auth::id();
+                $boothReserve->creator_id = \Auth::id();
             }
             $boothReserve->save();
             if (!$request->routeIs('dashboard.saveBoothReserveRequest')) {
