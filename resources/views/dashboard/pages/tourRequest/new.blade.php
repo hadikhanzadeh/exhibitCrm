@@ -53,24 +53,24 @@
                     <fieldset class="col-md-3">
                         <label class="form-label">{{ __('Activity Area') }}</label>
                         <input type="hidden" id="genreID" name="genre[]" value="">
-                        <input disabled id="genre" data-url="{{ route('dashboard.getExhibitGenre') }}" type="text"
-                               value="" name="genre[]" class="form-control"/>
+                        <input readonly id="genre" data-url="{{ route('dashboard.getExhibitGenre') }}" type="text"
+                               name="genre[]" class="form-control"/>
                     </fieldset>
                 </div>
                 <div class="row mb-3">
                     <fieldset class="col-md-3">
-                        <label for="company_name" class="form-label">{{ __('Company name') }}</label>
-                        <input class="form-control" name="company_name" id="company_name"
+                        <label for="company" class="form-label">{{ __('Company name') }}</label>
+                        <input class="form-control" name="company" id="company"
                                value="" type="text">
                     </fieldset>
                     <fieldset class="col-md-3">
-                        <label for="manager" class="form-label">{{ __('CEO name') }}</label>
-                        <input class="form-control" name="manager" id="manager" value=""
+                        <label for="ceo-name" class="form-label">{{ __('CEO name') }}</label>
+                        <input class="form-control" name="ceo-name" id="ceo-name" value=""
                                type="text">
                     </fieldset>
                     <fieldset class="col-md-3">
-                        <label for="mobile" class="form-label">{{ __('Phone number') }}</label>
-                        <input dir="ltr" class="form-control" name="mobile" id="mobile" value=""
+                        <label for="phone" class="form-label">{{ __('Phone number') }}</label>
+                        <input dir="ltr" class="form-control" name="phone" id="phone" value=""
                                type="text">
                     </fieldset>
                     <fieldset class="col-md-3">
@@ -80,8 +80,8 @@
                 </div>
                 <div class="row mb-3">
                     <fieldset class="col-md-3">
-                        <label for="user_id" class="form-label">{{ __('Name of Responsible') }}</label>
-                        <input class="form-control" name="user_id" id="user_id"
+                        <label for="responsible" class="form-label">{{ __('Name of Responsible') }}</label>
+                        <input class="form-control" name="responsible" id="responsible"
                                value=""
                                type="text">
                     </fieldset>

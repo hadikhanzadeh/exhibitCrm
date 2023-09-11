@@ -177,7 +177,6 @@ class TourRequestController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'company' => 'required|string',
-            'user_id' => 'required|integer',
             'exhibition' => 'required|integer',
             'exhibition-title' => 'required|string',
             'country' => 'required|array',
@@ -189,15 +188,14 @@ class TourRequestController extends Controller
             'ceo-name' => 'required|string',
             'participants' => 'required|integer'
         ]);
-        dd($validator->errors());
+
         if (!$validator->passes()) {
             return json_encode(['status' => 'error', 'message' => __('The information sent is not correct! Please check your information carefully.')]);
         }
-
         try {
             $tourRequest = new tourRequest;
             $trackingCode = wbsUtility::randomInt(10);
-            $tourRequest->user_id = (int)$request->get('user_id');
+            $tourRequest->user_id = $request->get('user_id') ?: 0;
             $tourRequest->company_name = $request->get('company');
             $tourRequest->exhibition_id = $request->get('exhibition');
             $tourRequest->exhibition_title = $request->get('exhibition-title');
@@ -213,10 +211,18 @@ class TourRequestController extends Controller
             $tourRequest->manager = $request->get('ceo-name');
             $tourRequest->responsible = $request->get('responsible');
             $tourRequest->tracking_code = $trackingCode;
-            $tourRequest->lang = $request->get('lang');
-
+            $tourRequest->lang = $request->get('lang') ?: app()->getLocale();
+            if ($request->routeIs('dashboard.saveTourRequest')) {
+                $tourRequest->operator_id = \Auth::id();
+            }
             $tourRequest->save();
-            return json_encode(['status' => 'success', 'message' => __('Your request has been successfully registered. Your tracking code: ') . $trackingCode]);
+            if ($request->routeIs('dashboard.saveTourRequest')) {
+                $request->session()->flash('success', __('Your request has been successfully registered. Your tracking code:') . $trackingCode);
+                return redirect()->route("dashboard.viewTourRequest", $tourRequest->id);
+
+            } else {
+                return json_encode(['status' => 'success', 'message' => __('Your request has been successfully registered. Your tracking code:') . $trackingCode]);
+            }
         } catch (\Exception $e) {
             dd($e->getMessage());
             return json_encode(['status' => 'error', 'message' => __('There is an error processing the sent information! Please raise with support.')]);
