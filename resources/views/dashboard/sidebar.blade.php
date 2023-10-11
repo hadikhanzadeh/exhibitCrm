@@ -30,6 +30,17 @@
                         {{ __('Booth Reserve Requests') }}
                     </a>
                 </li>
+                @php
+                    $user = \Auth::user();
+                @endphp
+                @if($user->role === 'administrator')
+                    <li>
+                        <a {!! (app()->getLocale() === 'fa' && request()->segment(2) === 'users') || (app()->getLocale() !== 'fa' && request()->segment(3) === 'users')  ? 'class="active"' : '' !!}  href="{{ route('dashboard.users') }}">
+                            <i class="icon-first-order"></i>
+                            {{ __('Users') }}
+                        </a>
+                    </li>
+                @endif
             </ul>
         </div>
     </div>

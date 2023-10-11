@@ -77,6 +77,12 @@
     "Total Meterage": "کل متراژ",
     "meter": "متر",
     "meters": "متر",
+    "Users": "کاربران",
+    "Create User": "ایجاد کاربر",
+    "Create New User": "ایجاد کاربر جدید",
+    "Full Name": "نام کامل",
+    "Role": "گروه کاربری",
+    "Confirm Password": "تکرار کلمه عبور",
     "Booth Reserve Requests": "درخواست های رزرو غرفه",
     "Create Tour Request": "ایجاد درخواست تور",
     "Create tour request": "ایجاد درخواست تور",
@@ -92,5 +98,6 @@
     "There is an error processing the sent information! Please raise with support.": "خطایی در پردازش اطلاعات ارسالی وجود دارد! لطفا با پشتیبانی مطرح نمایید.",
     "The desired information has been successfully updated.": "اطلاعات مورد نظر با موفقیت به روز رسانی گردید.",
     "Error! The desired information was not deleted. Please share with support.": "خطا! اطلاعات مورد نظر حذف نشد. لطفا با پشتسیبانی در میان بگذارید.",
-    "The desired information was successfully deleted.": "اطلاعات مورد نظر با موفقیت حذف گردید."
+    "The desired information was successfully deleted.": "اطلاعات مورد نظر با موفقیت حذف گردید.",
+    "Error in the information sent! Please enter the user information correctly.": "خطا در اطلاعات ارسالی! لطفا اطلاعات کاربر را به درستی وارد کنید."
 }
