@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Http;
 class crmAPI
 {
     protected string $token = 'nsafiiwqm8577@237dasd-3lsdklmas';
-    protected string $url = 'https://exhibit.local/api/';
+    protected string $url = 'https://exhibitionmakers.com/api/';
 
     /**
      * @param array $data
