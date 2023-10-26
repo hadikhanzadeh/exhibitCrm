@@ -58,9 +58,13 @@ Route::prefix(parseLocale())->group(function () {
         Route::post('/booth-reserve/view/{id}', [App\Http\Controllers\BoothReserveController::class, 'update'])->name('updateBoothReserve');
 
         /* ---------- User Routes ---------- */
-        Route::get('/users', [App\Http\Controllers\UserController::class, 'index'])->middleware('role:admin')->name('users');
-        Route::get('/create-user', [App\Http\Controllers\UserController::class, 'create'])->middleware('role:admin')->name('createUser');
-        Route::post('/save-user', [App\Http\Controllers\UserController::class, 'store'])->middleware('role:admin')->name('saveUser');
+        Route::get('/users', [App\Http\Controllers\UserController::class, 'index'])->middleware('role:administrator')->name('users');
+        Route::get('/create-user', [App\Http\Controllers\UserController::class, 'create'])->middleware('role:administrator')->name('createUser');
+        Route::post('/save-user', [App\Http\Controllers\UserController::class, 'store'])->middleware('role:administrator')->name('saveUser');
+        Route::get('/view-user/{id}', [App\Http\Controllers\UserController::class, 'show'])->middleware('role:administrator')->name('viewUser');
+        Route::post('/update-user', [App\Http\Controllers\UserController::class, 'update'])->middleware('role:administrator')->name('updateUser');
+        Route::get('/delete-user/{id}', [App\Http\Controllers\UserController::class, 'destroy'])->name('destroyUser');
+
         /* ------------------------------------- Post Requests ------------------------------------- */
         Route::post('/generate-token', [App\Http\Controllers\HomeController::class, 'generateToken'])->name('generateToken');
         Route::post('/getCountries', [App\Http\Controllers\AjaxController::class, 'getCountries'])->name('getCountries');

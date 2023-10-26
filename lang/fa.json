@@ -99,5 +99,13 @@
     "The desired information has been successfully updated.": "اطلاعات مورد نظر با موفقیت به روز رسانی گردید.",
     "Error! The desired information was not deleted. Please share with support.": "خطا! اطلاعات مورد نظر حذف نشد. لطفا با پشتسیبانی در میان بگذارید.",
     "The desired information was successfully deleted.": "اطلاعات مورد نظر با موفقیت حذف گردید.",
-    "Error in the information sent! Please enter the user information correctly.": "خطا در اطلاعات ارسالی! لطفا اطلاعات کاربر را به درستی وارد کنید."
+    "Error in the information sent! Please enter the user information correctly.": "خطا در اطلاعات ارسالی! لطفا اطلاعات کاربر را به درستی وارد کنید.",
+    "New User Created!": "کاربر جدید ایجاد گردید!",
+    "User Not Created!": "خطایی وجود دارد! کاربر ایجاد نشد!",
+    "View User": "مشاهده و ویرایش اطلاعات",
+    "User Updated!": "اطلاعات کاربر به روز رسانی گردید!",
+    "User Not Exist!": "کاربر یافت نشد!",
+    "User Deleted!": "کاربر حذف گردید!",
+    "You Cannot Delete This User!": "شما امکان حذف کاربری خود را ندارید!",
+    "Update User": "ذخیره تغییرات"
 }

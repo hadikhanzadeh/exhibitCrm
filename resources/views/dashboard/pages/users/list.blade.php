@@ -12,7 +12,13 @@
             </div>
         </div>
     </div>
-
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <div class="alert alert-danger">
+                {{$error}}
+            </div>
+        @endforeach
+    @endif
     <div class="row">
         <div class="col-12">
             <div class="main-content">
@@ -38,9 +44,9 @@
                                     <td>{{ $i }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
-                                    <td>{{ $user->role }}</td>
+                                    <td>{{ $user->role === 'administrator' ? 'مدیرکل' : 'کارشناس پشتیبانی' }}</td>
                                     <td class="action">
-                                        <a href="{{ route('dashboard.groupIndex',$user->id) }}"><i
+                                        <a href="{{ route('dashboard.viewUser',$user->id) }}"><i
                                                 class="icon-eye-2"></i></a>
                                     </td>
                                 </tr>

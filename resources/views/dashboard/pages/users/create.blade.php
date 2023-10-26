@@ -32,7 +32,7 @@
                     <fieldset class="col-md-4">
                         <label class="form-label required">{{ __('Role') }}</label>
                         <select class="form-select" name="role">
-                            <option value="admin">مدیرکل</option>
+                            <option value="administrator">مدیرکل</option>
                             <option selected value="operator">اپراتور</option>
                         </select>
                     </fieldset>
@@ -45,7 +45,7 @@
                     <fieldset class="col-md-4">
                         <label class="form-label required">{{ __('Confirm Password') }}</label>
                         <input class="form-control" type="password" required id="confirm-password"
-                               name="confirm-password">
+                               name="password_confirmation">
                     </fieldset>
                 </div>
                 <div class="row mt-5 justify-content-between">
