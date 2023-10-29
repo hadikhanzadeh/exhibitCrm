@@ -144,7 +144,7 @@ class BoothReserveController extends Controller
             }
             $boothReserve->save();
             if (!$request->routeIs('dashboard.saveBoothReserveRequest')) {
-                return json_encode(['status' => 'success', 'message' => __('Your request has been successfully registered. Your tracking code: ') . $trackingCode]);
+                return json_encode(['status' => 'success', 'message' => __('Your request has been successfully registered. Your tracking code: ') . $trackingCode, 'trackingCode' => $trackingCode]);
             }
             $request->session()->flash('success', __('Your request has been successfully registered. Your tracking code:') . $trackingCode);
             return redirect()->route("dashboard.viewBoothReserve", $boothReserve->id);

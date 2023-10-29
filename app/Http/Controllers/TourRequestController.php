@@ -225,7 +225,7 @@ class TourRequestController extends Controller
                 $request->session()->flash('success', __('Your request has been successfully registered. Your tracking code:') . $trackingCode);
                 return redirect()->route("dashboard.viewTourRequest", $tourRequest->id);
             }
-            return json_encode(['status' => 'success', 'message' => __('Your request has been successfully registered. Your tracking code:') . $trackingCode]);
+            return json_encode(['status' => 'success', 'message' => __('Your request has been successfully registered. Your tracking code:') . $trackingCode, 'trackingCode' => $trackingCode]);
         } catch (\Exception $e) {
             if (!$request->routeIs('dashboard.saveTourRequest')) {
                 return json_encode(['status' => 'error', 'message' => __('There is an error processing the sent information! Please raise with support.')]);

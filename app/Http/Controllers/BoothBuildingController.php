@@ -177,7 +177,7 @@ class BoothBuildingController extends Controller
 
             $boothBuilding->save();
             if (!$request->routeIs('dashboard.saveBoothBuildingRequest')) {
-                return json_encode(['status' => 'success', 'message' => __('Your request has been successfully registered. Your tracking code: ') . $trackingCode]);
+                return json_encode(['status' => 'success', 'message' => __('Your request has been successfully registered. Your tracking code: ') . $trackingCode, 'trackingCode' => $trackingCode]);
             }
             $request->session()->flash('success', __('Your request has been successfully registered. Your tracking code:') . $trackingCode);
             return redirect()->route("dashboard.viewBoothBuilding", $boothBuilding->id);
