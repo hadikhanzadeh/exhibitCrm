@@ -54,7 +54,7 @@ class BoothBuildingController extends Controller
         })
             ->orderBy('totalSize', 'desc')
             ->orderBy('created_at', 'desc')
-            ->select('exhibition_id', 'country_title', 'city_title', 'exhibition_title', DB::raw('COUNT(id) as totalCount'), DB::raw('SUM(meterage_booth) as totalSize'))->take(5)->groupBy('exhibition_id')->get();
+            ->select('exhibition_id', 'country_title', 'city_title', 'exhibition_title', DB::raw('COUNT(id) as totalCount'), DB::raw('SUM(meterage_booth) as totalSize'))->take(10)->groupBy('exhibition_id')->get();
         $params = [];
         if ($request->has('country')) {
             $params['country'] = $request->get('country');
@@ -330,7 +330,7 @@ class BoothBuildingController extends Controller
                 $query->where('status', 'like', $status);
             }
 
-        })->orderBy('meterage_booth', 'desc')->orderBy('created_at', 'desc')->paginate(2)->appends($request->all());
+        })->orderBy('meterage_booth', 'desc')->orderBy('created_at', 'desc')->paginate(10)->appends($request->all());
 
         $params = [];
         if ($request->has('country')) {
