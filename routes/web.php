@@ -26,6 +26,7 @@ Route::prefix(parseLocale())->group(function () {
     Route::group([
         'prefix' => '/dashboard',
         'as' => 'dashboard.',
+        'middleware' => 'auth'
     ], function () {
         Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
         Route::get('/token-form', [App\Http\Controllers\HomeController::class, 'createToken'])->name('createToken');
