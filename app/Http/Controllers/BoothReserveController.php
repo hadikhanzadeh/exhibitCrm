@@ -53,7 +53,7 @@ class BoothReserveController extends Controller
         })
             ->orderBy('totalSize', 'desc')
             ->orderBy('created_at', 'desc')
-            ->select('exhibition_id', 'country_title', 'city_title', 'exhibition_title', DB::raw('COUNT(id) as totalCount'), DB::raw('SUM(meterage_booth) as totalSize'))->take(10)->groupBy('exhibition_id')->get();
+            ->select('exhibition_id', 'country_title', 'city_title', 'exhibition_title', DB::raw('COUNT(id) as totalCount'), DB::raw('SUM(meterage_booth) as totalSize'))->take(1000)->groupBy('exhibition_id')->get();
         $params = [];
         if ($request->has('country')) {
             $params['country'] = $request->get('country');
